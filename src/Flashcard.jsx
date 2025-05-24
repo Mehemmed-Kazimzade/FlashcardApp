@@ -3,47 +3,13 @@ import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
-import { useState } from 'react';
-import Result from './Result';
-import { useQuiz } from './QuizContext';
 import FlashcardActions from './FlashcardActions';
 
-export default function Flashcard({flashcardObject, setSeries, size, flipCard}) {
-    const {score, setScore} = useQuiz();
-    const [quizFinished, setQuizFinished] = useState(false);
-
-    function handleScore(point) {
-        if (flashcardObject.place === size) {
-            setScore(prev => prev + point);
-            setQuizFinished(true);
-        }
-        else {
-            setScore(prev => prev + point);
-            handleNext();
-        }
-    }
-
-    function handleNext() {
-        if (flashcardObject.place < size) {
-            flipCard(flashcardObject.id);
-            setSeries(prev => prev + 1);
-        }
-    }
-
-    function handlePrevious() {
-        if (flashcardObject.place > 1) {
-            flipCard(flashcardObject.id);
-            setSeries(prev => prev - 1);
-        }
-    }
-
-    if (quizFinished) return <Result score={score} numOfQuestions={size} />
-
+export default function Flashcard({flashcardObject}) {
     const actionsprops = {
         id: flashcardObject.id,
         isFlipped: flashcardObject.flipped,
-        flipCard: flipCard,
-        handleScore: handleScore
+        place: flashcardObject.place
     }
 
     return <>

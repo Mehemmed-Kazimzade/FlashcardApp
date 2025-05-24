@@ -6,7 +6,8 @@ import FormControl from '@mui/material/FormControl';
 import { useQuiz } from './QuizContext';
 
 export default function CategorySelector() {
-    const {category, setCategory} = useQuiz();
+    const {category, dispatch} = useQuiz();
+
     return <>
         <Box minWidth={120}>
             <FormControl sx={{width:200}}>
@@ -16,7 +17,7 @@ export default function CategorySelector() {
                     id="demo-simple-select"
                     value={category}
                     label="Category"
-                    onChange={(e) => setCategory(e.target.value)}>
+                    onChange={(e) => dispatch({type: "SET_CATEGORY", payload: e.target.value})}>
                     <MenuItem value={"All"}>All</MenuItem>
                     <MenuItem value={"React"}>React</MenuItem>
                     <MenuItem value={"Java"}>Java</MenuItem>

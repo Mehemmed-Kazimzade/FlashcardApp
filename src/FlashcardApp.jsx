@@ -7,10 +7,10 @@ import EnrichData from "./EnrichData";
 
 export default function FlashcardApp() {
     const navigate = useNavigate();
-    const {setFlashcards, category} = useQuiz();
+    const {category, dispatch} = useQuiz();
 
     useEffect(() => {
-        setFlashcards(EnrichData(category));
+        dispatch({type: "SET_FLASHCARDS", payload: EnrichData(category)});
     }, [category]);
 
     const handleClick = () => navigate("/practice/");

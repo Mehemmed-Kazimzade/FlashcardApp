@@ -1,14 +1,13 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useContext, useReducer } from "react";
+import { initialState, quizReducer } from "./quizReducer";
 
 const QuizContext = createContext();
 
 export function QuizProvider({children}) {
-    const [flashcards, setFlashcards] = useState([]);
-    const [score, setScore] = useState(0);
-    const [category, setCategory] = useState("All");
+    const [state, dispatch] = useReducer(quizReducer, initialState);
 
     return (
-        <QuizContext.Provider value={{flashcards, setFlashcards, score, setScore, category, setCategory}}>
+        <QuizContext.Provider value={{...state, dispatch}}>
             {children}
         </QuizContext.Provider>
     )

@@ -25,8 +25,9 @@ export function quizReducer(state, action) {
 
             return {
                 ...state,
-                flashcards: enrichedData,
+                flashcards: enrichedData || [],
             }
+
         }
 
         case "INIT_QUIZ": {

@@ -10,7 +10,8 @@ export default function FlashcardApp() {
     const {category, dispatch} = useQuiz();
 
     useEffect(() => {
-        dispatch({type: "SET_FLASHCARDS", payload: EnrichData(category)});
+        const enrichedData = EnrichData(category);
+        dispatch({type: "SET_FLASHCARDS", payload: {enrichedData} });
     }, [category]);
 
     const handleClick = () => navigate("/practice/");

@@ -1,0 +1,50 @@
+.flip-wrapper {
+  perspective: 1200px;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  height: 195px;
+  position: relative;
+}
+
+.flip-inner {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+  position: relative;
+}
+
+.flip-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  backface-visibility: hidden;
+}
+
+.flip-front,
+.flip-back {
+  display: flex;
+  flex-direction: column;
+}
+
+.flip-back {
+  transform: rotateY(180deg);
+}
+
+/* Fix flipped mirrored content inside MUI Card */
+.flip-back .MuiCardContent-root {
+  transform: rotateY(180deg);
+}
+
+
+.flip-back {
+    transform: rotateY(180deg);
+}
+
+.flip-content {
+  transform: rotateY(180deg);
+  height: 100%;
+}

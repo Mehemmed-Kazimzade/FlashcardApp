@@ -12,11 +12,11 @@ export function quizReducer(state, action) {
 
     switch(action.type) {
         case "SET_CATEGORY": {
-            const {category} = action.payload;
+            const {newCategory} = action.payload;
 
             return {
                 ...state,
-                category: category
+                category: newCategory
             }
         }
 

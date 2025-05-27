@@ -18,6 +18,6 @@ export default function FlashcardApp() {
 
     return <> 
         <CategorySelector />
-        <Button variant="contained" onClick={handleClick}>Start the Quiz</Button>
+        <Button variant="contained" sx={{ marginBlockStart: 2 }} onClick={handleClick}>Start the Quiz</Button>
     </>
 }

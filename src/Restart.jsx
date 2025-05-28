@@ -12,7 +12,7 @@ export default function Restart() {
     }
 
     return (
-        <Button variant="contained" sx={{ marginBlockStart: 2 }} onClick={handleClick}> Reset the quiz </Button>
+        <Button variant="outlined" sx={{ mt: 3, mb: 1 }} onClick={handleClick}> Reset the quiz </Button>
     )
     
 }

@@ -78,9 +78,34 @@ export function quizReducer(state, action) {
 
         case "RECORD_SCORE": {
             const {score} = action.payload;
+
             return {
                 ...state,
                 score: state.score + score,
+            }
+        }
+
+        case "RECORD_REMEMBERED": {
+            const {id} = action.payload;
+
+            const updatedFlashcards = state.flashcards.map(card => (
+                (card.id === id) ? {...card, isRemembered: true} : card
+            ))
+
+            return {
+                ...state,
+                flashcards: updatedFlashcards
+            }
+        }
+
+        case "PRACTICE_AGAIN": {
+            const {updatedFlashcards} = action.payload;
+
+            return {
+                ...state,
+                flashcards: updatedFlashcards,
+                series: 0,
+                score: 0,
             }
         }
 

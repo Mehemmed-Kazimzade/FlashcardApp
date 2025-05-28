@@ -17,6 +17,7 @@ export function useQuizManager() {
     }
 
     const handleScore = (score, place, id) => {
+        if (score === 1) dispatch({type:"RECORD_REMEMBERED", payload: {id}});
         dispatch({type: "RECORD_SCORE", payload: {score}});
 
         if(place === flashcards.length) endQuiz();

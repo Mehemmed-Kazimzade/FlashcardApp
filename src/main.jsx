@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import "./App.css";
+import "./css/App.css";
+
 import FlashcardApp from './FlashcardApp';
 import Result from './Result';
 import FlashcardList from './FlashcardList';

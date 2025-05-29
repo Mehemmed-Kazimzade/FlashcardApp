@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
-import './FlipStyles.css';
-import CardBack from './CardBack';
-import CardFront from './CardFront';
+import './css/FlipStyles.css';
+import CardBack from './flipAnimationComponents/CardBack';
+import CardFront from './flipAnimationComponents/CardFront';
 
 export default function Flashcard({ flashcardObject }) {
   const actionsprops = {

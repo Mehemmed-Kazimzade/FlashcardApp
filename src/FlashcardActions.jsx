@@ -2,7 +2,7 @@ import Button from '@mui/material/Button';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
-import { useQuizManager } from './QuizManager';
+import { useQuizManager } from './hooks/QuizManager';
 
 export default function FlashcardActions({props}) {
     const {showAnswer, handleScore} = useQuizManager();

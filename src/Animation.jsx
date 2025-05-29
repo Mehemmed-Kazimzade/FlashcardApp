@@ -1,10 +1,14 @@
-import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import Lottie from 'lottie-react';
+import confettiAnimation from './celebrationAnimation.json';
+import { Box } from '@mui/material';
 
 export const Animation = () => {
-  return (
-    <DotLottieReact
-      src="https://lottie.host/90c907c5-cced-4726-965c-91abb2609c20/lLNuMfExZ1.lottie"
-      autoplay={true}
-    />
-  );
+
+    return <>
+        <Box className="animationContainer">
+            <Lottie className="animationContainer"
+                animationData={confettiAnimation}
+                loop={false}/>
+        </Box>
+    </>
 };

@@ -1,7 +1,7 @@
-import Flashcard from "./Flashcard";
+import Flashcard from "../components/Flashcard";
 import LinearProgress from '@mui/material/LinearProgress';
 import { Box } from "@mui/material";
-import { useQuiz } from "./QuizContext";
+import { useQuiz } from "../hooks/QuizContext";
 
 export default function FlashcardList() {
     const {flashcards, series} = useQuiz();

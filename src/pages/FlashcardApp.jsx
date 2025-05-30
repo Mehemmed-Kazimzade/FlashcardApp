@@ -1,12 +1,12 @@
 import { Button } from "@mui/material";
-import CategorySelector from "./CategorySelector";
-import { useNavigate } from "react-router";
 import { useEffect } from "react";
-import { useQuiz } from "./QuizContext";
-import EnrichData from "./EnrichData";
+import { useNavigate } from "react-router";
+import CategorySelector from "../components/CategorySelector";
+import EnrichData from "../utils/EnrichData";
+import { useQuiz } from "../hooks/QuizContext";
 
 export default function FlashcardApp() {
-    const navigate = useNavigate();
+    const navigate = useNavigate(); 
     const {category, dispatch} = useQuiz();
 
     useEffect(() => {
@@ -16,7 +16,7 @@ export default function FlashcardApp() {
 
     const handleClick = () => navigate("/practice/");
 
-    return <> 
+    return <>
         <CategorySelector />
         <Button variant="contained" sx={{ marginBlockStart: 2 }} onClick={handleClick}>Start the Quiz</Button>
     </>

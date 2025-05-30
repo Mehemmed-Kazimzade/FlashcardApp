@@ -3,7 +3,7 @@ import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
-import FlashcardActions from '../FlashcardActions';
+import FlashcardActions from '../components/FlashcardActions';
 
 export default function CardFront({place, question, actionsprops}) {
     return <>

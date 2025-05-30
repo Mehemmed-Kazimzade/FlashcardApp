@@ -1,5 +1,5 @@
 import Lottie from 'lottie-react';
-import confettiAnimation from './celebrationAnimation.json';
+import confettiAnimation from '../data/celebrationAnimation.json';
 import { Box } from '@mui/material';
 
 export const Animation = () => {

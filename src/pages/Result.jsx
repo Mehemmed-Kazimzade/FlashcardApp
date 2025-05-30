@@ -1,14 +1,13 @@
-import PracticeForgottenCards from "./PracticeForgottenCards";
-import { useQuiz } from "./QuizContext"
+import PracticeForgottenCards from "../components/PracticeForgottenCards";
+import { useQuiz } from "../hooks/QuizContext"
 import Typography from '@mui/material/Typography';
-import ResultCard from "./ResultCard";
-import { PieChart } from '@mui/x-charts/PieChart';
+import ResultCard from "../components/ResultCard";
 import TrackChangesIcon from '@mui/icons-material/TrackChanges';
 import { Box } from "@mui/material";
-import SuccessMessage from "./SuccessMessage";
-import getScoreColor from "./utils/getScoreColor";
-import useScoreStats from "./hooks/useScoreStats";
-import ScorePieChart from "./components/ScorePieChart";
+import SuccessMessage from "../components/SuccessMessage";
+import getScoreColor from "../utils/getScoreColor";
+import useScoreStats from "../hooks/useScoreStats";
+import ScorePieChart from "../components/ScorePieChart";
 
 export default function Result() {
     const {score, flashcards} = useQuiz();

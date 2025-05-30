@@ -1,4 +1,4 @@
-import { useQuiz } from "../QuizContext";
+import { useQuiz } from "./QuizContext";
 import { useNavigate } from "react-router";
 
 

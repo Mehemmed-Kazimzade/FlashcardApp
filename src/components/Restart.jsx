@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import { useQuiz } from "./QuizContext";
+import { useQuiz } from "../hooks/QuizContext";
 import { useNavigate } from "react-router";
 
 export default function Restart() {

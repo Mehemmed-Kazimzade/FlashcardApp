@@ -3,7 +3,7 @@ import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel'; 
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
-import { useQuiz } from './QuizContext';
+import { useQuiz } from '../hooks/QuizContext';
 
 export default function CategorySelector() {
     const {category, dispatch} = useQuiz();

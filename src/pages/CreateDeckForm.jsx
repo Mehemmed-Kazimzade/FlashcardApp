@@ -30,6 +30,7 @@ export default function CreateDeckForm() {
         }, 100);
     }
 
+    
     const updateInputField = (id, inputName, inputValue) => {
         setFormData(prev => prev.map(input => (
             (input.id === id) ? {...input, [inputName]: inputValue} : input

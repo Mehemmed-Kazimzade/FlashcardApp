@@ -8,6 +8,7 @@ import CreateDeckForm from './pages/CreateDeckForm';
 import { QuizProvider } from './hooks/QuizContext';
 import MiniDrawer from './components/MiniDrawer';
 import Decks from './pages/Decks';
+import EditDeck from './pages/EditDeck';
 import "./css/App.css";
 
 
@@ -22,6 +23,7 @@ createRoot(document.getElementById('root')).render(
                     <Route path='/result' element={<Result />} />
                     <Route path="/decks/" element={<Decks />}></Route>
                     <Route path='/createDeck/' element={<CreateDeckForm />} />
+                    <Route path='/editDeck/:deckId' element={<EditDeck />} />
                 </Route>
             </Routes>
         </BrowserRouter>

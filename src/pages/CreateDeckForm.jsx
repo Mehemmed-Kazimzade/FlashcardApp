@@ -3,65 +3,19 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import React, { useState } from 'react';
 import { v4 as getId } from 'uuid';
+import submitToLocalStorage from '../utils/submitToLocalStorage';
+import { useNavigate } from 'react-router';
+import useDeckForm from '../hooks/useDeckForm';
 
 export default function CreateDeckForm() {
-    const [deckData, setDeckData] = useState({
-        deckName: "",
-        deckDescription: ""
-    });
+    const navigate = useNavigate();
 
-    const [formData, setFormData] = useState([{
-            id: getId(),
-            question: "",
-            answer: "",
-        }]);
-
-    const updateDeckData = (inputName, value) => {
-        setDeckData(prev => ({...prev, [inputName]: value}));
-    }
-
-    const addInputField = () => {
-        const newField = {id: getId(), question: "", answer: ""};
-        setFormData(prev => ([...prev, newField]));
-
-        setTimeout(() => {
-        const lastCard = document.querySelector(`[data-card-id="${newField.id}"]`);
-        lastCard?.scrollIntoView({ behavior: 'smooth' });
-        }, 100);
-    }
-
-    
-    const updateInputField = (id, inputName, inputValue) => {
-        setFormData(prev => prev.map(input => (
-            (input.id === id) ? {...input, [inputName]: inputValue} : input
-        )));
-    }
-
-    const deleteInputField = (id) => {
-        setFormData(prev => prev.filter(input => input.id !== id));
-    }
-
-    const isValid = () => {
-        let valid = true;
-        if (deckData.deckName.trim() === "") valid = false;
-        if (formData.length === 1) valid = false;
-
-        formData.forEach((inputField) => {
-            if (inputField.question.trim() === "" && inputField.answer.trim() === "") valid = false;
-        })
-
-        return valid;
-    }
-
-    const handleSave = (e) => {
-        e.preventDefault();
-        if (isValid()) {
-
-        }
-    }
+    const {deckData, formData, error,updateDeckData, updateInputField, deleteInputField, addInputField, handleSave} = useDeckForm(
+        {deckName: "", deckDescription: ""}, [{ id: getId(), question: "", answer: "" }],(deck, cards) => submitToLocalStorage(deck, cards) 
+    );
 
     return (
-        <form onSubmit={(e) => handleSave(e)}>
+        <form onSubmit={(e) => handleSave(e, () => navigate("/decks/", {state: {status:"SUCCESS" ,message: "Deck created successfully!"}}))}>
             <Box sx={{ p: 4, maxWidth: 800, mx: 'auto' }}>
             <Paper elevation={3} sx={{ p: 4, borderRadius: 3 }}>
                 <Typography variant="h5" fontWeight="bold" gutterBottom>
@@ -105,10 +59,16 @@ export default function CreateDeckForm() {
                     Add New Card
                 </Button>
 
+                <Box>
+                    <Typography variant="h6" fontWeight="bold" gutterBottom color='error'>
+                        {error}
+                    </Typography>
+                </Box>
+
                 {/* Save / Cancel Buttons */}
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 2 }}>
                 <Button variant="text">Cancel</Button>
-                <Button variant="contained">Save Deck</Button>
+                <Button variant="contained" type='submit' color={error === "" ? "primary" : "error"}>Save Deck</Button>
                 </Box>
             </Paper>
             </Box>

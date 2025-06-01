@@ -1,10 +1,29 @@
 import { Box, Button, Grid, Paper, TextField, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { Link } from 'react-router';
-import FolderOpenIcon from '@mui/icons-material/FolderOpen';
+import { useLocation } from 'react-router';
+import { useEffect, useState } from 'react';
+import ToastMessenger from '../utils/ToastMessenger';
+import getDecksFromLocalStorage from '../utils/getDecksFromLocalStorage';
+import DeckList from '../components/DeckList';
 
 export default function Decks() {
+    const location = useLocation();
+    const [toastProps, setToastProps] = useState(null);
+    const [decks, setDecks] = useState([]);
+
+    useEffect(() => {
+        setDecks(getDecksFromLocalStorage());
+        const state = location.state
+        if(state?.message && state?.status) {
+            setToastProps({status: state.status, message: state.message});
+            window.history.replaceState({}, document.title);
+        }
+    }, [])
+
     return <>
+    {toastProps && <ToastMessenger status={toastProps.status} message={toastProps.message} />}
+
     <Box sx={{ p: 4, maxWidth: 1000, mx: 'auto' }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
         <Typography variant="h4" fontWeight="bold">Your Decks</Typography>
@@ -19,37 +38,7 @@ export default function Decks() {
 
       {/* Deck List Grid */}
       <Grid container spacing={3} alignItems={"center"}>
-        <Grid size={{xs: 12, sm: 6, md: 4}} xs={12} sm={6} md={4}>
-          <Paper elevation={3} sx={{ p: 3, borderRadius: 2 }}>
-            <Typography variant="h6" fontWeight="bold" gutterBottom>
-              React Basics
-            </Typography>
-            <Typography variant="body2" color="text.secondary" gutterBottom>
-              10 cards • Last practiced: 2 days ago
-            </Typography>
-            <Typography variant="body2" sx={{ mt: 1 }}>
-              Best score: 8 / 10
-            </Typography>
-
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 3 }}>
-              <Button size="small" variant="contained">Practice</Button>
-              <Button size="small" variant="outlined">Edit</Button>
-            </Box>
-          </Paper>
-        </Grid>
-
-
-        <Grid size={{xs: 12, sm: 6,  md: 4}}>
-          <Box sx={{ textAlign: 'center', mt: 6 }}>
-            <FolderOpenIcon sx={{ fontSize: 64, color: 'text.disabled', mb: 2 }} />
-            <Typography variant="h6" color="text.secondary">
-              You haven't created any decks yet.
-            </Typography>
-            <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
-              Start by clicking “Create New Deck” above.
-            </Typography>
-          </Box>
-        </Grid>
+        {<DeckList decks={decks} />}
       </Grid>
     </Box>
     </>

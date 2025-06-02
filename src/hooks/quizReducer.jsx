@@ -1,5 +1,6 @@
 export const initialState = {
     category: "All",
+    selectedDeck: "Random Deck",
     flashcards: [],
     score: 0,
     series: 0
@@ -20,14 +21,23 @@ export function quizReducer(state, action) {
             }
         }
 
-        case "SET_FLASHCARDS": {
-            const {enrichedData} = action.payload;
+        case "SET_DECK": {
+            const {newSelectedDeck} = action.payload;
 
             return {
                 ...state,
-                flashcards: enrichedData || [],
+                selectedDeck: newSelectedDeck,
             }
+        }
 
+        case "SET_FLASHCARDS_FROM_DECK": {
+            console.log(action.payload);
+            const {flashcards} = action.payload;
+
+            return {
+                ...initialState,
+                flashcards: flashcards
+            }
         }
 
         case "INIT_QUIZ": {
@@ -115,6 +125,7 @@ export function quizReducer(state, action) {
                 flashcards: [],
                 series: 0,
                 score: 0,
+                selectedDeck: "Random Deck"
             }
         }
 

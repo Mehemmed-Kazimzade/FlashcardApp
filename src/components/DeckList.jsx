@@ -1,16 +1,27 @@
 import { Box, Button, Grid, Paper, Typography } from '@mui/material';
+import { useNavigate } from "react-router";
 import FolderOpenIcon from '@mui/icons-material/FolderOpen';
 import { Link } from 'react-router';
+import React from "react";
+import { useQuiz } from '../hooks/QuizContext';
+import { startPracticeSession } from '../utils/startPracticeSession';
 
 // @ts-check
 
-import React from "react";
 /**
  * @param {Object[]} decks
  * @returns {React.JSX.Element}
  */
 
 export default function DeckList({decks}) {
+    const {dispatch} = useQuiz();
+    const navigate = useNavigate();
+
+    const handlePractice = (deck) => {
+        startPracticeSession(deck, dispatch, navigate);
+    }
+
+
     if (decks.length === 0) {
         return <>
             <Grid size={{xs: 12, sm: 6,  md: 4}}>
@@ -41,7 +52,7 @@ export default function DeckList({decks}) {
                         Best score: 0 / {oneDeck.cards.length}
                     </Typography>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 3 }}>
-                        <Button size="small" variant="contained">Practice</Button>
+                        <Button size="small" variant="contained" onClick={() => handlePractice(oneDeck)} >Practice</Button>
                         <Link to={`/editDeck/${oneDeck.id}`}><Button size="small" variant="outlined">Edit</Button></Link>
                     </Box>
                 </Paper>

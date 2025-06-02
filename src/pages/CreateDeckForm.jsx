@@ -67,7 +67,7 @@ export default function CreateDeckForm() {
 
                 {/* Save / Cancel Buttons */}
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 2 }}>
-                <Button variant="text">Cancel</Button>
+                <Button variant="text" onClick={() => (navigate("/decks/"))}>Cancel</Button>
                 <Button variant="contained" type='submit' color={error === "" ? "primary" : "error"}>Save Deck</Button>
                 </Box>
             </Paper>

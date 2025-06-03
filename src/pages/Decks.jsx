@@ -3,7 +3,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { Link } from 'react-router';
 import { useLocation } from 'react-router';
 import { useEffect, useState } from 'react';
-import ToastMessenger from '../utils/ToastMessenger';
+import ToastMessenger from '../components/ToastMessenger';
 import getDecksFromLocalStorage from '../utils/getDecksFromLocalStorage';
 import DeckList from '../components/DeckList';
 

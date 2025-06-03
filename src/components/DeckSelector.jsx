@@ -17,7 +17,7 @@ export default function DeckSelector() {
 
     return <>
         <Box minWidth={120}>
-            <FormControl sx={{width:200}}>
+            <FormControl >
                 <InputLabel id="demo-simple-select-label">Deck</InputLabel>
                 <Select
                     labelId="demo-simple-select-label"
@@ -26,6 +26,7 @@ export default function DeckSelector() {
                     label="Select Deck"
                     onChange={(e) => handleChange(e)}>
                     <MenuItem value={"Random Deck"}>Random Deck</MenuItem>
+                    <MenuItem value={"All Decks"}>All Decks</MenuItem>
 
                     {
                         allDecks.map(d => (

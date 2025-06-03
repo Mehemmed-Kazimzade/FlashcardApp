@@ -31,24 +31,11 @@ export function quizReducer(state, action) {
         }
 
         case "SET_FLASHCARDS_FROM_DECK": {
-            console.log(action.payload);
             const {flashcards} = action.payload;
 
             return {
                 ...initialState,
                 flashcards: flashcards
-            }
-        }
-
-        case "INIT_QUIZ": {
-            const {category, enrichedData} = action.payload;
-
-            return {
-                ...state,
-                flashcards: enrichedData,
-                category: category,
-                series: 0,
-                score: 0,
             }
         }
 

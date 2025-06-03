@@ -1,4 +1,4 @@
-export default function findDeckIdFromName(deckName) {
+export default function getDeckFromName(deckName) {
     const decksIndex = JSON.parse(localStorage.getItem("decksIndex") || "[]");
 
     // found variable corresponds to deck that is founded or null if not.

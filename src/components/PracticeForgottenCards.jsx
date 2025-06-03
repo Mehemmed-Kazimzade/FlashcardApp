@@ -8,7 +8,6 @@ export default function PracticeForgottenCards({forgotten}) {
 
     const handleClick = () => {
         const updatedFlashcards = flashcards.filter(card => (!card.isRemembered)).map((card, idx) => ({...card, flipped:false, place: idx + 1}));
-        console.log(updatedFlashcards);
         dispatch({type: "PRACTICE_AGAIN", payload: {updatedFlashcards}});
         navigate("/practice");
     }

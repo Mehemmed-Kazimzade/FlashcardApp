@@ -9,7 +9,7 @@ import { v4 as getId } from 'uuid';
 
 /**
  * @typedef {Object} Card
- * @property {int} id
+ * @property {String} id
  * @property {string} question
  * @property {string} answer
  */

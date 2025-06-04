@@ -1,6 +1,6 @@
 import convertDeckIntoFlashcard from "./convertDeckIntoFlashcard";
 import shuffleArray from "./shuffleArray";
-import assignPlaces from "../utils/assingPlaces";
+import assignPlaces from "./assignPlaces";
 
 /**
  * Launches a practice session with the given deck

@@ -12,7 +12,7 @@ export default function getAllDecksCombined() {
     };
 
     for(const index of shuffledDecksIndex) {
-        const deck = JSON.parse(localStorage.getItem(index), "{}");
+        const deck = JSON.parse(localStorage.getItem(index), "[]");
         allDecks["cards"].push(...deck.cards);
     }
 

@@ -20,10 +20,9 @@ export default function FlashcardList() {
         question: currentFlashcard.question,
     }
 
-    console.log(selectedDeck);
     return <>
         <Box maxWidth="800px" margin="0 auto">
-            <Typography variant="h4">  </Typography>
+            <Typography variant="h5" sx={{ mb: 2.4 }}> Practicing: <b>{selectedDeck}</b> </Typography>
             <LinearProgress variant="determinate" value={progressValue} sx={{marginBlockEnd: 2}} />
             {<Flashcard flashcardObject={flashcardObject}/>}
         </Box>

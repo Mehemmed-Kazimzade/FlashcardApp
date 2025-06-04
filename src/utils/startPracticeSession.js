@@ -9,11 +9,12 @@ import assignPlaces from "../utils/assingPlaces";
  * @param {Function} navigate - react-router navigate function
  */
 
-export function startPracticeSession(deck, dispatch, navigate, options = {}) {
+export function startPracticeSession(deck, dispatch, navigate, selectedDeck, options = {}) {
     let flashcards = convertDeckIntoFlashcard(deck);
+    const decksIndex = deck.id.split(" ");
 
     if (options.shuffle) flashcards = assignPlaces(shuffleArray(flashcards));
 
-    dispatch({ type: "SET_FLASHCARDS_FROM_DECK", payload: { flashcards } });
+    dispatch({ type: "SET_FLASHCARDS_FROM_DECK", payload: { flashcards, selectedDeck, decksIndex} });
     navigate("/practice/");
 }

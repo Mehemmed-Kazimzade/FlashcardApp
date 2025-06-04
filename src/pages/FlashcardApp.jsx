@@ -21,18 +21,17 @@ export default function FlashcardApp() {
     const handleClick = () => {
         // Step 1: Figure out what mode we're in ("random", "all", or "selected").
         const mode = determineModeFromSelectedDeck(selectedDeck);
-
+        
         // Step 2: Get the appropriate deck object based on that mode.
         const deck = getDeckFromSelectedMode(mode, selectedDeck);
-
+        
         // Prevent null crashes or empty decks
         if (!deck || !deck.cards || deck.cards.length === 0) {
             alert("Could not find a valid deck with cards.");
             return;
         }
-
         // Step 3: Start the practice session (dispatch cards, navigate to quiz).
-        startPracticeSession(deck, dispatch, navigate, {shuffle});
+        startPracticeSession(deck, dispatch, navigate, selectedDeck, {shuffle});
     };
     return <>
         <Box 

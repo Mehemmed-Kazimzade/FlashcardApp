@@ -18,7 +18,7 @@ export default function DeckList({decks}) {
     const navigate = useNavigate();
 
     const handlePractice = (deck) => {
-        startPracticeSession(deck, dispatch, navigate);
+        startPracticeSession(deck, dispatch, navigate, deck.deckName);
     }
 
 

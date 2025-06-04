@@ -6,13 +6,13 @@ export default function getAllDecksCombined() {
     const shuffledDecksIndex = shuffleArray(decksIndex);
 
     const allDecks = {
+        id: decksIndex.join(" "),
         deckName: "All Decks",
         cards: [],
     };
 
     for(const index of shuffledDecksIndex) {
         const deck = JSON.parse(localStorage.getItem(index), "{}");
-        console.log(deck);
         allDecks["cards"].push(...deck.cards);
     }
 

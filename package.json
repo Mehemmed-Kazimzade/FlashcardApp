@@ -17,6 +17,7 @@
     "@mui/icons-material": "^7.1.0",
     "@mui/material": "^7.1.0",
     "@mui/x-charts": "^8.4.0",
+    "dayjs": "^1.11.13",
     "flashcard-app": "file:",
     "framer-motion": "^12.15.0",
     "lottie-react": "^2.4.1",

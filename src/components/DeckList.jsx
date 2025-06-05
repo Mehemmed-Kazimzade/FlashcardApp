@@ -5,6 +5,7 @@ import { Link } from 'react-router';
 import React from "react";
 import { useQuiz } from '../hooks/QuizContext';
 import { startPracticeSession } from '../utils/startPracticeSession';
+import formatDate from '../utils/dateFormatter';
 
 // @ts-check
 
@@ -46,10 +47,10 @@ export default function DeckList({decks}) {
                         {oneDeck.deckName}
                     </Typography>
                     <Typography variant="body2" color="text.secondary" gutterBottom>
-                        {oneDeck.cards.length} card(s) • Last practiced: {oneDeck.lastPracticed === null ? "N / A" : oneDeck.lastPracticed}
+                        {oneDeck.cards.length} card(s) • Last practiced: {oneDeck.lastPracticed === null ? "Never" : formatDate(oneDeck.lastPracticed)}
                     </Typography>
                     <Typography variant="body2" sx={{ mt: 1 }}>
-                        Best score: 0 / {oneDeck.cards.length}
+                        Best score: {oneDeck.bestScore ? oneDeck.bestScore : 0} / {oneDeck.cards.length}
                     </Typography>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 3 }}>
                         <Button size="small" variant="contained" onClick={() => handlePractice(oneDeck)} >Practice</Button>

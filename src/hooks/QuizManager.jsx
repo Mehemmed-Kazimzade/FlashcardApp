@@ -1,10 +1,11 @@
 import setLastPracticedAt from "../utils/setLastPracticedAt";
+import setBestScore from "../utils/setBestScore";
 import { useQuiz } from "./QuizContext";
 import { useNavigate } from "react-router";
 
 
 export function useQuizManager() {
-    const {flashcards,decksIndex, dispatch} = useQuiz();
+    const {flashcards,decksIndex,score, dispatch} = useQuiz();
     const navigate = useNavigate();
 
     const showAnswer = (id) => dispatch({type:"FLIP", payload: {id}});
@@ -27,6 +28,7 @@ export function useQuizManager() {
     }
 
     const endQuiz = () => {
+        setBestScore(decksIndex, score);
         setLastPracticedAt(decksIndex);
         navigate("/result");
     };

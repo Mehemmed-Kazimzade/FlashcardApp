@@ -1,14 +1,17 @@
 import { TextField } from "@mui/material";
-import { useState } from "react";
+import { useQuiz } from "../hooks/QuizContext";
 
-export default function TimeSetter( {isValid, setIsValid} ) {
-    const [duration, setDuration] = useState("1");
+export default function TimeSetter() {
+    const {duration, isValid, timeDispatch} = useQuiz();
 
     const handleChange = (value) => {
         // Allow empty input
         if (value === "") {
-            setDuration("");
-            setIsValid(true);
+            let isValid = true;
+
+            timeDispatch({type: "SET_DURATION", payload: {value}});
+            timeDispatch({type: "SET_IS_VALID", payload: {isValid}});
+
             return;
         }
 
@@ -16,18 +19,21 @@ export default function TimeSetter( {isValid, setIsValid} ) {
         if (/^\d+$/.test(value)) {
             const number = parseInt(value, 10);
             if (number >= 1 && number <= 30) {
-                setIsValid(true);
+                let isValid = true;
+                timeDispatch({type: "SET_IS_VALID", payload: {isValid}});
             }
             else{
-                setIsValid(false);
+                let isValid = false;
+                timeDispatch({type: "SET_IS_VALID", payload: {isValid}});
             }
         }
-
+        
         else{
-            setIsValid(false);
+            let isValid = false;
+            timeDispatch({type: "SET_IS_VALID", payload: {isValid}});
         }
 
-        setDuration(value);
+        timeDispatch({type: "SET_DURATION", payload: {value}});
     };
 
     return <TextField type="text" value={duration} 

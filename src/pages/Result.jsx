@@ -10,6 +10,7 @@ import useScoreStats from "../hooks/useScoreStats";
 import ScorePieChart from "../components/ScorePieChart";
 import setBestScore from "../utils/setBestScore";
 import { useEffect } from "react";
+import { useLocation } from "react-router";
 
 export default function Result() {
     const {score, decksIndex, flashcards} = useQuiz();

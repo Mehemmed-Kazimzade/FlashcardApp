@@ -14,14 +14,6 @@ export function quizReducer(state, action) {
     }
 
     switch(action.type) {
-        case "SET_DURATION": {
-            const {duration} = action.payload;
-
-            return {
-                ...state,
-                duration: duration,
-            }
-        }
 
         case "SET_CATEGORY": {
             const {newCategory} = action.payload;

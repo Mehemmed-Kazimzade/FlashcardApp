@@ -16,15 +16,19 @@ import TimeSetter from "../components/timeSetter";
 
 export default function FlashcardApp() {
     const [shuffle, setShuffle] = useState(false); // state for shuffling cards.
-    const [timer, setTimer] = useState(false);
-    const [isValid, setIsValid] = useState(true);
     const navigate = useNavigate(); 
-    const {selectedDeck, dispatch} = useQuiz();  // global state for current dropdown selection.
+    const {selectedDeck, dispatch, timer, isValid, timeDispatch} = useQuiz();  // global state for current dropdown selection.
+
+    const setTimer = (checked) => {
+        timeDispatch({type: "SET_TIMER", payload: {checked}});
+    }
 
     const handleClick = () => {
         // Step 1: Figure out what mode we're in ("random", "all", or "selected").
 
-        if (timer && !isValid) return;
+        if (timer) {
+            if (!isValid) return;
+        }
     
         const mode = determineModeFromSelectedDeck(selectedDeck);
         
@@ -43,7 +47,7 @@ export default function FlashcardApp() {
     return <>
         <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" minHeight="80vh"ml={6}>
             {/* Card-like container */}
-            {timer && <TimeSetter isValid={isValid} setIsValid={setIsValid} />}
+            {timer && <TimeSetter/>}
             <Paper elevation={3} 
                 sx={{p: 4, borderRadius: 2, width: "100%", maxWidth: 400, textAlign: "center" }}>
                 <Typography variant="h5" fontWeight="bold" mb={3}>

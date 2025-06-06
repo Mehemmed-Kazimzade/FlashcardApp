@@ -1,7 +1,3 @@
-Certainly! Based on your project structure and our previous discussions, here's a comprehensive `README.md` file tailored for your FlashcardApp:
-
----
-
 # FlashcardApp
 
 FlashcardApp is a modern, responsive flashcard application built with React and Material UI. It enables users to create, manage, and practice flashcards across various decks, featuring a built-in timer, progress tracking, and performance analytics.

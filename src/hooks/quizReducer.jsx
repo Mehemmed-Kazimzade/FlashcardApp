@@ -4,7 +4,8 @@ export const initialState = {
     decksIndex: [],
     flashcards: [],
     score: 0,
-    series: 0
+    series: 0,
+    duration: 0,
 };
 
 export function quizReducer(state, action) {
@@ -13,6 +14,15 @@ export function quizReducer(state, action) {
     }
 
     switch(action.type) {
+        case "SET_DURATION": {
+            const {duration} = action.payload;
+
+            return {
+                ...state,
+                duration: duration,
+            }
+        }
+
         case "SET_CATEGORY": {
             const {newCategory} = action.payload;
 
@@ -115,6 +125,7 @@ export function quizReducer(state, action) {
                 flashcards: [],
                 series: 0,
                 score: 0,
+                duration: 0,
                 selectedDeck: "Random Deck"
             }
         }

@@ -1,5 +1,4 @@
 import setLastPracticedAt from "../utils/setLastPracticedAt";
-import setBestScore from "../utils/setBestScore";
 import { useQuiz } from "./QuizContext";
 import { useNavigate } from "react-router";
 
@@ -28,7 +27,6 @@ export function useQuizManager() {
     }
 
     const endQuiz = () => {
-        setBestScore(decksIndex, score);
         setLastPracticedAt(decksIndex);
         navigate("/result");
     };

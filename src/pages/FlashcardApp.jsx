@@ -12,14 +12,20 @@ import determineModeFromSelectedDeck from "../utils/determineModeFromSelectedDec
 
 // Utility: returns the correct deck object based on quiz mode
 import getDeckFromSelectedMode from "../utils/getDeckFromSelectedMode";
+import TimeSetter from "../components/timeSetter";
 
 export default function FlashcardApp() {
     const [shuffle, setShuffle] = useState(false); // state for shuffling cards.
+    const [timer, setTimer] = useState(false);
+    const [isValid, setIsValid] = useState(true);
     const navigate = useNavigate(); 
     const {selectedDeck, dispatch} = useQuiz();  // global state for current dropdown selection.
 
     const handleClick = () => {
         // Step 1: Figure out what mode we're in ("random", "all", or "selected").
+
+        if (timer && !isValid) return;
+    
         const mode = determineModeFromSelectedDeck(selectedDeck);
         
         // Step 2: Get the appropriate deck object based on that mode.
@@ -30,29 +36,16 @@ export default function FlashcardApp() {
             alert("Could not find a valid deck with cards.");
             return;
         }
+        
         // Step 3: Start the practice session (dispatch cards, navigate to quiz).
         startPracticeSession(deck, dispatch, navigate, selectedDeck, {shuffle});
     };
     return <>
-        <Box 
-            display="flex" 
-            flexDirection="column" 
-            alignItems="center" 
-            justifyContent="center" 
-            minHeight="80vh"
-            ml={6}
-        >
+        <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" minHeight="80vh"ml={6}>
             {/* Card-like container */}
-            <Paper 
-                elevation={3} 
-                sx={{
-                    p: 4, 
-                    borderRadius: 2, 
-                    width: "100%", 
-                    maxWidth: 400, 
-                    textAlign: "center" 
-                }}
-            >
+            {timer && <TimeSetter isValid={isValid} setIsValid={setIsValid} />}
+            <Paper elevation={3} 
+                sx={{p: 4, borderRadius: 2, width: "100%", maxWidth: 400, textAlign: "center" }}>
                 <Typography variant="h5" fontWeight="bold" mb={3}>
                     Start Your Flashcard Practice
                 </Typography>
@@ -64,16 +57,14 @@ export default function FlashcardApp() {
 
                 {/* Shuffle option */}
                 <Box mb={2}>
-                    <FormControlLabel
-                        control={
-                            <Checkbox 
-                                checked={shuffle} 
-                                onChange={(e) => setShuffle(e.target.checked)} 
-                            />
-                        }
+                    <FormControlLabel control={<Checkbox  checked={shuffle}  onChange={(e) => setShuffle(e.target.checked)} />}
                         label="Shuffle Cards"
                     />
+                    <FormControlLabel control={<Checkbox  checked={timer}  onChange={(e) => setTimer(e.target.checked)} />}
+                        label="Set A Timer"
+                    />
                 </Box>
+
 
                 {/* Start Quiz button */}
                 <Button 
@@ -81,7 +72,7 @@ export default function FlashcardApp() {
                     size="large"
                     fullWidth 
                     onClick={handleClick}
-                >
+                    >
                     Start the Quiz
                 </Button>
             </Paper>

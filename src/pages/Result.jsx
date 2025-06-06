@@ -8,12 +8,18 @@ import SuccessMessage from "../components/SuccessMessage";
 import getScoreColor from "../utils/getScoreColor";
 import useScoreStats from "../hooks/useScoreStats";
 import ScorePieChart from "../components/ScorePieChart";
+import setBestScore from "../utils/setBestScore";
+import { useEffect } from "react";
 
 export default function Result() {
-    const {score, flashcards} = useQuiz();
+    const {score, decksIndex, flashcards} = useQuiz();
     const total = flashcards.length;
 
     const {remembered, forgotten} = useScoreStats(flashcards);
+
+    useEffect(() => {
+        setBestScore(decksIndex, score);
+    }, []);
 
     return <>
         {total === score && <SuccessMessage />}

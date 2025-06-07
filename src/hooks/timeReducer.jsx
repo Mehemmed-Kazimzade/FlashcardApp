@@ -2,7 +2,7 @@ export const initialTimeState = {
     duration: 0,
     timer: false,
     isValid: true,
-    timeLeft: -1,
+    timeLeft: -1,   
 }
 
 export function timeReducer(state, action) {

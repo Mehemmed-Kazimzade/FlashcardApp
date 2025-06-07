@@ -8,7 +8,8 @@ function formatDate(lastPracticed) {
     const timeInSeconds = timeDifference / 1000;
     const timeInMinutes = timeInSeconds / (60);
     const timeInHours = timeInMinutes / (60);
-    const timeInDays = timeInHours / (24)
+    const timeInDays = timeInHours / (24);
+    const timeInWeeks = timeInDays / 7;
 
     if (timeInSeconds < 10) return "a few seconds ago";
 
@@ -22,10 +23,12 @@ function formatDate(lastPracticed) {
     
     else if (timeInHours < 24) return `${timeInHours.toFixed(0)} hours ago`;
 
-    else if (timeInDays < 7) return `a day ago`;
+    else if (timeInDays < 2) return `a day ago`;
 
-    else if (timeInDays < 2) return `${timeInDays.toFixed(0)} days ago`;
+    else if (timeInDays < 7) return `${timeInDays.toFixed(0)} days ago`;
+    
 
+    return `${timeInWeeks.toFixed(0)} weeks ago`;
 }
 
 export default formatDate;

@@ -6,6 +6,7 @@ export const initialState = {
     score: 0,
     series: 0,
     duration: 0,
+    quizEnded: false,
 };
 
 export function quizReducer(state, action) {
@@ -40,7 +41,8 @@ export function quizReducer(state, action) {
                 ...initialState,
                 decksIndex: decksIndex,
                 selectedDeck: selectedDeck,
-                flashcards: flashcards
+                flashcards: flashcards,
+                quizEnded: false,
             }
         }
 
@@ -108,6 +110,7 @@ export function quizReducer(state, action) {
                 flashcards: updatedFlashcards,
                 series: 0,
                 score: 0,
+                quizEnded: false,
             }
         }
 
@@ -118,7 +121,15 @@ export function quizReducer(state, action) {
                 series: 0,
                 score: 0,
                 duration: 0,
-                selectedDeck: "Random Deck"
+                selectedDeck: "Random Deck",
+                quizEnded: false,
+            }
+        }
+
+        case "END_QUIZ": {
+            return {
+                ...state,
+                quizEnded: true,
             }
         }
 

@@ -5,6 +5,7 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { useQuiz } from "../hooks/QuizContext";
 import { useEffect, useState, useRef } from "react";
 import { useQuizManager } from "../hooks/QuizManager";
+import { motion } from "framer-motion";
 
 export default function FlashcardList() {
     const {flashcards,timer, selectedDeck, series, duration, timeDispatch} = useQuiz();
@@ -61,22 +62,55 @@ export default function FlashcardList() {
     }
 
     return <>
-        <Box maxWidth="800px" margin="0 auto">
-            <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 2.4 }}>
-                <Typography variant="h5">
+            <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+            >
+            <Box className="flashcardsContainer"
+                maxWidth="900px"
+                mx="auto"
+                px={2}
+                py={4}
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+            >
+                <Stack
+                    direction={{ xs: "column", sm: "row" }}
+                    justifyContent="space-between"
+                    alignItems={{ xs: "flex-start", sm: "center" }}
+                    sx={{ width: "100%", mb: 3, gap: 1 }}>
+
+                <Typography variant="h6" fontWeight="600">
                     Practicing: <b>{selectedDeck}</b>
                 </Typography>
 
-                {/* Timer UI */}
-                {timer && duration !== "" && <Chip color={color}
+                {timer && duration !== "" && (
+                    <Chip
+                    color={color}
                     icon={<AccessTimeIcon />}
                     label={`Time: ${minutes}:${seconds}`}
                     variant="outlined"
-                    sx={{ fontSize: "0.95rem", fontWeight: 700 }}
-                />}
-            </Stack>
-            <LinearProgress variant="determinate" value={progressValue} sx={{marginBlockEnd: 2}} />
-            {<Flashcard flashcardObject={flashcardObject}/>}
-        </Box>
+                    sx={{
+                        fontSize: "0.95rem",
+                        fontWeight: 700,
+                        px: 1.2,
+                        py: 0.6,
+                        borderRadius: 2,
+                    }}
+                    />
+                )}
+                </Stack>
+
+                <LinearProgress variant="determinate" value={progressValue} 
+                sx={{ width: "100%", height: 8, borderRadius: 5, backgroundColor: "#e0e0e0", mb: 3, 
+                    "& .MuiLinearProgress-bar": { backgroundColor: theme => theme.palette.primary.main, },}}/>
+
+                <Box width="100%" maxWidth="600px">
+                    <Flashcard flashcardObject={flashcardObject} />
+                </Box>
+            </Box>
+        </motion.div>
     </>
 }

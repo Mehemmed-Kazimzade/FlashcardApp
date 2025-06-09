@@ -18,14 +18,11 @@ export function useQuizManager() {
         if (place > 1) dispatch({type:"PREVIOUS", payload: {id}})
     }
 
-    const handleScore = (score, place, id) => {
-        if (!endCalledRef.current) {
-            if (score === 1) dispatch({type:"RECORD_REMEMBERED", payload: {id}});
-            dispatch({type: "RECORD_SCORE", payload: {score}});
-        }
+    const handleScore = (score, place, id, type = "button") => {
+        if (score === 1) dispatch({type:"RECORD_REMEMBERED", payload: {id}});
+        dispatch({type: "RECORD_SCORE", payload: {score}});
 
         if (place === flashcards.length) {
-            endCalledRef.current = true;
             endQuiz()
         }
 

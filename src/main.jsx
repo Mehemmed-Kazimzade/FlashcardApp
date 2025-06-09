@@ -8,26 +8,30 @@ import CreateDeckForm from './pages/CreateDeckForm';
 import { QuizProvider } from './hooks/QuizContext';
 import MiniDrawer from './components/MiniDrawer';
 import Decks from './pages/Decks';
+import theme from './hooks/useTheme';
+import { ThemeProvider } from '@emotion/react';
 import EditDeck from './pages/EditDeck';
 import "./css/App.css";
 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <QuizProvider>
-        <BrowserRouter>
-            <Routes>
-                <Route path='/' element={<MiniDrawer />}>
-                    <Route index element={<FlashcardApp />} />
-                    <Route path='/practice' element={<FlashcardList />} />
-                    <Route path='/result' element={<Result />} />
-                    <Route path="/decks/" element={<Decks />}></Route>
-                    <Route path='/createDeck/' element={<CreateDeckForm />} />
-                    <Route path='/editDeck/:deckId' element={<EditDeck />} />
-                </Route>
-            </Routes>
-        </BrowserRouter>
-    </QuizProvider>
+    <ThemeProvider theme={theme}>
+      <QuizProvider>
+            <BrowserRouter>
+                <Routes>
+                    <Route path='/' element={<MiniDrawer />}>
+                        <Route index element={<FlashcardApp />} />
+                        <Route path='/practice' element={<FlashcardList />} />
+                        <Route path='/result' element={<Result />} />
+                        <Route path="/decks/" element={<Decks />}></Route>
+                        <Route path='/createDeck/' element={<CreateDeckForm />} />
+                        <Route path='/editDeck/:deckId' element={<EditDeck />} />
+                    </Route>
+                </Routes>
+            </BrowserRouter>
+      </QuizProvider>
+    </ThemeProvider>
   </StrictMode>,
 )
 

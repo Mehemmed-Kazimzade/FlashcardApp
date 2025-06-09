@@ -52,9 +52,9 @@ export default function DeckList({decks}) {
                     <Typography variant="body2" sx={{ mt: 1 }}>
                         Best score: {oneDeck.bestScore ? oneDeck.bestScore : 0} / {oneDeck.cards.length}
                     </Typography>
-                    <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 3 }}>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 3 }} className="deckButtonsContainer">
                         <Button size="small" variant="contained" onClick={() => handlePractice(oneDeck)} >Practice</Button>
-                        <Link to={`/editDeck/${oneDeck.id}`}><Button size="small" variant="outlined">Edit</Button></Link>
+                        <Link to={`/editDeck/${oneDeck.id}`}><Button size="small" variant="outlined" fullWidth={true}>Edit</Button></Link>
                     </Box>
                 </Paper>
             </Grid>

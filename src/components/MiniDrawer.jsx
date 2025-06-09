@@ -116,7 +116,7 @@ export default function MiniDrawer() {
   const links = ["/","decks/","account/"];
 
   return <>
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex' }} className="drawer">
       <CssBaseline />
       <AppBar position="fixed" open={open}>
         <Toolbar>
@@ -147,7 +147,7 @@ export default function MiniDrawer() {
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <List>
+        <List >
           {['Practice','Decks','Account'].map((text, index) => (
             <Link key={index} to={links[index]}>
                   <ListItem key={text} disablePadding sx={{ display: 'block' }}>

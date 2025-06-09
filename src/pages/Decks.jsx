@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import ToastMessenger from '../components/ToastMessenger';
 import getDecksFromLocalStorage from '../utils/getDecksFromLocalStorage';
 import DeckList from '../components/DeckList';
+import { motion } from 'framer-motion';
 
 export default function Decks() {
     const location = useLocation();
@@ -22,24 +23,31 @@ export default function Decks() {
     }, [])
 
     return <>
-    {toastProps && <ToastMessenger status={toastProps.status} message={toastProps.message} />}
+    <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+        >
 
-    <Box sx={{ p: 4, maxWidth: 1000, mx: 'auto' }}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
-        <Typography variant="h4" fontWeight="bold">Your Decks</Typography>
-        <Link to={"/createDeck/"}>
-            <Button variant="contained" startIcon={<AddIcon />}>
-                Create New Deck
-            </Button>
-        </Link>
-      </Box>
+        {toastProps && <ToastMessenger status={toastProps.status} message={toastProps.message} />}
+        <Box className="deckListContainer" sx={{ p: 4, maxWidth: 1000, mx: 'auto' }}>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }} className="decksContainer" >
+            <Typography variant="h4" fontWeight="bold">Your Decks</Typography>
+            <Link to={"/createDeck/"}>
+                <Button variant="contained" startIcon={<AddIcon />} className='createDeckButton'>
+                    Create New Deck
+                </Button>
+            </Link>
+          </Box>
 
-      <TextField fullWidth variant="outlined" placeholder="Search decks..." sx={{ mb: 4 }} />
+          <TextField fullWidth variant="outlined" placeholder="Search decks..." sx={{ mb: 4 }} />
 
-      {/* Deck List Grid */}
-      <Grid container spacing={3} alignItems={"center"}>
-        {<DeckList decks={decks} />}
-      </Grid>
-    </Box>
+          {/* Deck List Grid */}    
+          <Grid container spacing={3} alignItems={"center"}>
+            {<DeckList decks={decks} />}
+          </Grid>
+        </Box>
+
+    </motion.div>
     </>
 }

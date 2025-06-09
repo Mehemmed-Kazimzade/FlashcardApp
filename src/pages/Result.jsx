@@ -10,7 +10,7 @@ import useScoreStats from "../hooks/useScoreStats";
 import ScorePieChart from "../components/ScorePieChart";
 import setBestScore from "../utils/setBestScore";
 import { useEffect } from "react";
-import { useLocation } from "react-router";
+import { motion } from "framer-motion";
 
 export default function Result() {
     const {score, decksIndex, flashcards} = useQuiz();
@@ -23,25 +23,31 @@ export default function Result() {
     }, []);
 
     return <>
-        {total === score && <SuccessMessage />}
-        
-        <Box className="resultBox">
+        <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+        >
+            {total === score && <SuccessMessage />}
 
-            <ResultCard>
+            <Box className="resultBox">
+
+                <ResultCard>
+                    
+                    <Typography sx={{ color:getScoreColor(score, total) }} variant="h6" fontWeight="bold" gutterBottom >
+                        <TrackChangesIcon sx={{ mr: 1, color: 'primary.main' }} /> Your Score: {score} / {total}
+                    </Typography>
+
+                    <Typography><b>Remembered</b>: {remembered} </Typography>
+
+                    <Typography><b>Forgotten</b>: {forgotten} </Typography>
+
+                    {<PracticeForgottenCards forgotten={forgotten} />}
                 
-                <Typography sx={{ color:getScoreColor(score, total) }} variant="h6" fontWeight="bold" gutterBottom >
-                    <TrackChangesIcon sx={{ mr: 1, color: 'primary.main' }} /> Your Score: {score} / {total}
-                </Typography>
+                </ResultCard>
 
-                <Typography><b>Remembered</b>: {remembered} </Typography>
-
-                <Typography><b>Forgotten</b>: {forgotten} </Typography>
-
-                {<PracticeForgottenCards forgotten={forgotten} />}
-            
-            </ResultCard>
-
-            <ScorePieChart rCards={remembered} fCards={forgotten} />
-        </Box>
+                <ScorePieChart rCards={remembered} fCards={forgotten} />
+            </Box>
+        </motion.div>
     </>
 }

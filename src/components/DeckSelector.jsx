@@ -19,7 +19,7 @@ export default function DeckSelector() {
         <Box minWidth={120}>
             <FormControl >
                 <InputLabel id="demo-simple-select-label">Deck</InputLabel>
-                <Select
+                <Select className='deckSelector'
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     value={selectedDeck}
@@ -30,7 +30,9 @@ export default function DeckSelector() {
 
                     {
                         allDecks.map(d => (
-                            <MenuItem value={d.deckName}>{d.deckName}</MenuItem>
+                            <MenuItem value={d.deckName}>
+                                {d.deckName}
+                            </MenuItem>
                         ))
                     }
 

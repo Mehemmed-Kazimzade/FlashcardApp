@@ -22,6 +22,7 @@ import { startPracticeSession } from "../utils/startPracticeSession";
 import determineModeFromSelectedDeck from "../utils/determineModeFromSelectedDeck";
 import getDeckFromSelectedMode from "../utils/getDeckFromSelectedMode";
 import TimeSetter from "../components/timeSetter";
+import ResponsiveButton from "../components/ResposiveButton";
 
 export default function FlashcardApp() {
   const [shuffle, setShuffle] = useState(false);
@@ -52,11 +53,11 @@ export default function FlashcardApp() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
     >
-      <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" minHeight="85vh" px={2}>
+      <Box className="mainContainer">
         {timer && <TimeSetter />}
 
-        <Paper elevation={4} sx={{ p: 4, borderRadius: 4, width: "100%", maxWidth: 420, backgroundColor: "#fdfdfd", textAlign: "center"}}>
-            <Typography variant="h5" fontWeight="bold" mb={2}>
+        <Paper className="practicePaperContainer" elevation={4}>
+            <Typography variant="h5" fontWeight="bold" mb={2} fontSize={{ xs: 16 }} >
                 Start Your Flashcard Practice
             </Typography>
 
@@ -66,7 +67,7 @@ export default function FlashcardApp() {
                 <DeckSelector />
             </Box>
 
-        <Stack direction="row" spacing={2} justifyContent="center" alignItems="center" mb={3}>
+        <Stack direction={{ xs: 'column', lg: 'row' }} spacing={2} justifyContent="center" alignItems="center" mb={3}>
             <FormControlLabel
               control={
                 <Checkbox
@@ -92,15 +93,8 @@ export default function FlashcardApp() {
             />
           </Stack>
 
-          <Button variant="contained" fullWidth size="large" onClick={handleClick}
-                sx={{
-                fontWeight: "bold",
-                textTransform: "none",
-                py: 1.2
-                }}
-            >
-            Start the Quiz
-          </Button>
+          <ResponsiveButton onClick={handleClick} text={"Start the Quiz"} />
+
         </Paper>
       </Box>
     </motion.div>

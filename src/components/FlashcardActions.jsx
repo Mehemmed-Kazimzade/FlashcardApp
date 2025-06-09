@@ -5,6 +5,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { useQuizManager } from '../hooks/QuizManager';
 import { useEffect } from 'react';
 import { useQuiz } from '../hooks/QuizContext';
+import ResponsiveFlashcardButton from './ResponsiveFlashcardButton';
  
 export default function FlashcardActions({ props }) {
     const {quizEnded} = useQuiz();
@@ -37,21 +38,20 @@ export default function FlashcardActions({ props }) {
 
     if (!props.isFlipped) {
         return <>
-            <Button variant="contained" id="showAnswerButton" startIcon={<VisibilityIcon />} onClick={() => showAnswer(props.id)}>
-                Show Answer
-            </Button>
+            <ResponsiveFlashcardButton startIcon={<VisibilityIcon />} 
+                onClick={() => showAnswer(props.id)} id='showAnswerButton' text="Show Answer" />
         </>
     }
 
     return (
             <div className="buttonsContainer">
-                <Button variant="contained" startIcon={<RemoveIcon />} onClick={() => handleScore(0, props.place, props.id)}>
-                    Forgot
-                </Button>
-                {/* <Button variant="contained" startIcon={<VisibilityOffIcon />} onClick={() => flipCard(id)}> Hide Again </Button> */}
-                <Button variant="contained" startIcon={<AddIcon />} onClick={(e) => {handleScore(1, props.place, props.id)}}>
-                    Remembered 
-                </Button>
+
+                <ResponsiveFlashcardButton startIcon={<RemoveIcon />} 
+                    onClick={() => handleScore(0, props.place, props.id)} text="Forgot" />
+
+                <ResponsiveFlashcardButton startIcon={<AddIcon />} 
+                    onClick={() => handleScore(1, props.place, props.id)} text="Remembered" />
+
             </div>
     )
 }

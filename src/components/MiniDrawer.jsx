@@ -20,6 +20,7 @@ import NoteAltIcon from '@mui/icons-material/NoteAlt';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import ViewAgendaIcon from '@mui/icons-material/ViewAgenda';
 import { Outlet, Link } from 'react-router';
+import ThemeToggle from './ThemeToggle';
 
 const drawerWidth = 240;
 
@@ -100,7 +101,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-export default function MiniDrawer() {
+export default function MiniDrawer( {toggleMode, mode} ) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -134,9 +135,14 @@ export default function MiniDrawer() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Flashcard App
-          </Typography>
+          <Box display={"flex"} justifyContent={"space-between"} width={"100%"} alignItems={"center"}>
+              <Typography variant="h6" noWrap component="div">
+                Flashcard App
+              </Typography>
+
+              <ThemeToggle toggleMode={toggleMode} mode={mode} />
+
+          </Box>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>

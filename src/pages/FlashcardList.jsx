@@ -67,22 +67,14 @@ export default function FlashcardList() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
             >
-            <Box className="flashcardsContainer"
-                maxWidth="900px"
-                mx="auto"
-                px={2}
-                py={4}
-                display="flex"
-                flexDirection="column"
-                alignItems="center"
-            >
+            <Box className="flashcardsContainer">
                 <Stack
                     direction={{ xs: "column", sm: "row" }}
                     justifyContent="space-between"
                     alignItems={{ xs: "flex-start", sm: "center" }}
                     sx={{ width: "100%", mb: 3, gap: 1 }}>
 
-                <Typography variant="h6" fontWeight="600">
+                <Typography variant="h6" fontWeight="600" fontSize={ {xs: 15} }>
                     Practicing: <b>{selectedDeck}</b>
                 </Typography>
 

@@ -30,11 +30,11 @@ export default function Result() {
         >
             {total === score && <SuccessMessage />}
 
-            <Box className="resultBox">
+            <Box className="resultBox" display={"flex"}>
 
                 <ResultCard>
                     
-                    <Typography sx={{ color:getScoreColor(score, total) }} variant="h6" fontWeight="bold" gutterBottom >
+                    <Typography sx={{ color:getScoreColor(score, total) }} variant="h6" fontWeight="bold" gutterBottom fontSize={{ xs: 18 }}>
                         <TrackChangesIcon sx={{ mr: 1, color: 'primary.main' }} /> Your Score: {score} / {total}
                     </Typography>
 

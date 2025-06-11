@@ -1,5 +1,5 @@
 export const initialTimeState = {
-    duration: 0,
+    duration: 1,
     timer: false,
     isValid: true,
     timeLeft: -1,   

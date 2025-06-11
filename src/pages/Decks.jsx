@@ -12,9 +12,28 @@ export default function Decks() {
     const location = useLocation();
     const [toastProps, setToastProps] = useState(null);
     const [decks, setDecks] = useState([]);
+    const [filteredDecks, setFilteredDecks] = useState([]);
+    const [searchValue, setSearchValue] = useState("");
+
+    const handleChange = (value) => {
+        setSearchValue(value);
+        if (value === "") {
+            setFilteredDecks(decks);
+        }
+
+        else{
+            const query = value.toLowerCase();
+            const regex = new RegExp(query, "i");
+            
+            setFilteredDecks(decks.filter(deck => regex.test(deck.deckName.toLowerCase())));
+        }
+    }
 
     useEffect(() => {
-        setDecks(getDecksFromLocalStorage());
+        const decksFromStorage = getDecksFromLocalStorage();
+        setDecks(decksFromStorage);
+        setFilteredDecks(decksFromStorage);
+
         const state = location.state
         if(state?.message && state?.status) {
             setToastProps({status: state.status, message: state.message});
@@ -40,11 +59,12 @@ export default function Decks() {
             </Link>
           </Box>
 
-          <TextField fullWidth variant="outlined" placeholder="Search decks..." sx={{ mb: 4 }} />
+          <TextField fullWidth variant="outlined" value={searchValue} onChange={(e) => handleChange(e.target.value)}
+          placeholder="Search decks..." sx={{ mb: 4 }} />
 
           {/* Deck List Grid */}    
           <Grid container spacing={3} alignItems={"center"}>
-            {<DeckList decks={decks} />}
+            {<DeckList searchValue={searchValue} decks={filteredDecks}/>}
           </Grid>
         </Box>
 

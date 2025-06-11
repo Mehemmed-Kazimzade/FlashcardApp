@@ -9,7 +9,11 @@ export default function PracticeForgottenCards({forgotten}) {
     const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
 
     const handleClick = () => {
-        const updatedFlashcards = flashcards.filter(card => (!card.isRemembered)).map((card, idx) => ({...card, flipped:false, place: idx + 1}));
+        const updatedFlashcards = 
+            flashcards.filter(
+                card => (!card.isRemembered)).map((card, idx) => 
+                    ({...card, flipped:false, place: idx + 1}));
+
         dispatch({type: "PRACTICE_AGAIN", payload: {updatedFlashcards}});
         navigate("/practice");
     }

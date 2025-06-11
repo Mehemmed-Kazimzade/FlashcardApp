@@ -100,6 +100,11 @@ a {
     align-items: center;
 }
 
+.css-nfu9oy {
+    position: absolute;
+    right: 10px;
+    top:10px;
+}
 
 @media screen and (max-width: 1100px) {
     .deckListContainer, .flashcardsContainer, .resultBox {

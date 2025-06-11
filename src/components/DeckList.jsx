@@ -52,10 +52,6 @@ export default function DeckList({decks, searchValue}) {
             <Grid key={oneDeck.id} size={{xs: 12, sm: 6, md: 4}} position={"relative"}>
                 <Paper elevation={3} sx={{ p: 3, borderRadius: 2 }}>
 
-                    <Box display={"flex"} alignItems={"center"} justifyContent="space-between" width="fit-content">
-                        <LongMenu className="longMenu" handleDelete={handleDelete} id={oneDeck.id} />
-                    </Box>
-
                     <Typography variant="h6" fontWeight="bold" gutterBottom>
                         {oneDeck.deckName}
                     </Typography>

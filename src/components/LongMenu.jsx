@@ -10,7 +10,7 @@ const options = [
 
 const ITEM_HEIGHT = 48;
 
-export default function LongMenu({handleDelete, id}) {
+export default function LongMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
@@ -18,13 +18,8 @@ export default function LongMenu({handleDelete, id}) {
     setAnchorEl(event.currentTarget);
   };
 
-  const options_handlers = {
-  'Delete': handleDelete,
-  }
-
-  const handleClose = (option) => {
+  const handleClose = () => {
     setAnchorEl(null);
-    options_handlers[option](id);
   };
 
 
@@ -59,7 +54,7 @@ export default function LongMenu({handleDelete, id}) {
         }}
       >
         {options.map((option) => (
-          <MenuItem key={option} selected={option === 'Pyxis'} onClick={() => handleClose(option)}>
+          <MenuItem key={option} selected={option === 'Pyxis'} onClick={handleClose}>
             {option}
           </MenuItem>
         ))}

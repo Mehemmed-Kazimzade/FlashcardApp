@@ -9,13 +9,13 @@ import Skeleton from '@mui/material/Skeleton';
 export default function CardBack({answer, flipped, actionsprops}) {
     return <>
         <div className="flip-face flip-back">
-            <Card sx={{ height: '100%' }}>
+            <Card>
                 <CardContent>
                     <div className="flip-content">
                         <Typography variant="h5" sx={{ color: 'text.secondary', mb: 2 }}>
                             Answer:
                         </Typography>
-                        <Typography variant="body1" sx={{ mt: 2 }}>
+                        <Typography variant="body1">
                             {flipped ? answer : <Skeleton animation="wave" />}
                         </Typography>
                     </div>

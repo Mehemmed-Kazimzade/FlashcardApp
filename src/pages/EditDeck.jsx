@@ -8,6 +8,8 @@ import getDeckWithId from '../utils/getDeckWithId';
 import useDeckForm from '../hooks/useDeckForm';
 import updateLocalStorage from '../utils/updateLocalStorage';
 import { motion } from 'framer-motion';
+import LongMenu from '../components/LongMenu';
+import {Divider} from '@mui/material';
 
 export default function EditDeck() {
     const { deckId } = useParams();
@@ -38,24 +40,29 @@ export default function EditDeck() {
                         "/decks/", {state: {status:"SUCCESS", message: "Deck updated successfully"
                         }}))}>
 
-                <Box sx={{ p: { xs: 2, md: 4 }, maxWidth: 900, mx: 'auto' }}>
+                <Box sx={{ p: { xs: 2, md: 4 }, maxWidth: 900, mx: 'auto', position:"relative" }}>
                     <Paper elevation={3} sx={{ p: { xs: 2, md: 4 }, borderRadius: 3, ml: 4 }}>
 
-                        <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, 
-                            justifyContent: 'space-between', alignItems: { sm: 'center' }, mb: 3, gap: 2 }}>
-                            <Typography variant="h5" fontWeight="bold">Edit Deck</Typography>
-                            <Button startIcon={<ArrowBackIcon />} variant="outlined" fullWidth={true} 
-                            sx={{ maxWidth: { sm: 'fit-content' } }}>
+                        <Box display={"flex"} mb={2}>
+                            <Button startIcon={<ArrowBackIcon />} variant="outlined" sx={{ maxWidth: { sm: 'fit-content' }, }}>
                                 Back to Decks
                             </Button>
                         </Box>
 
-                        <TextField fullWidth value={deckData.deckName} 
+                        <Divider sx={{ my: 2 }} />
+
+                        <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, 
+                            justifyContent: 'space-between', alignItems: { sm: 'center' }, mb: 3, gap: 2 }}>
+                            <Typography variant="h5" fontWeight="bold">Edit Deck</Typography>
+                            <LongMenu />
+                        </Box>
+
+                        <TextField fullWidth value={deckData.deckName}
                             onChange={(e) => updateDeckData("deckName", e.target.value)} 
                             placeholder="e.g., React Fundamentals" 
                             variant="outlined" sx={{ mb: 3 }}/>
 
-                        <TextField fullWidth value={deckData.deckDescription} 
+                        <TextField fullWidth value={deckData.deckDescription}
                             onChange={(e) => updateDeckData("deckDescription", e.target.value)} 
                             multiline rows={2} 
                             placeholder="Update the deck's description" sx={{ mb: 4 }}/>
@@ -66,7 +73,7 @@ export default function EditDeck() {
 
                             <Grid container spacing={2} alignItems="center" sx={{ mb: 2 }} key={card.id}>
                                 <Grid size={{ xs: 12, sm: 5 }}>
-                                    <TextField fullWidth value={card.question} 
+                                    <TextField fullWidth value={card.question} data-card-id={card.id}
                                     onChange={(e) => updateInputField(card.id, "question", e.target.value)} 
                                     placeholder="e.g., What is JSX?"/>
                                 </Grid>

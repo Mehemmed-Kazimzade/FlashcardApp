@@ -11,6 +11,7 @@ export default function ToastMessenger({ status, message }) {
         if (!status || !message) return;
 
         if (status === "SUCCESS") toast.success(message);
+        if (status === "WARNING") toast.warning(message);
         if (status === "ERROR") toast.error(message);
     }, []);
 

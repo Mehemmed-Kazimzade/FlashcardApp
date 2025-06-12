@@ -35,11 +35,11 @@ export default function DeckList({decks, searchValue}) {
             <Grid size={{xs: 12, sm: 6,  md: 4}}>
                 <Box sx={{ textAlign: 'center', mt: 6 }}>
                     <FolderOpenIcon sx={{ fontSize: 64, color: 'text.disabled', mb: 2 }} />
-                        <Typography variant="h6" color="text.secondary">
+                        <Typography className='text' variant="h6" color="text.secondary">
                             {searchValue === "" ? "You haven't created any decks yet." : 
                             `There is no deck that matches with '${searchValue}'`}
                         </Typography>
-                    <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
+                    <Typography className='text' variant="body2" color="text.secondary" sx={{ mt: 1 }}>
                         Start by clicking “Create New Deck” above.
                     </Typography>
                 </Box>

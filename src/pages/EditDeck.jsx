@@ -10,11 +10,32 @@ import updateLocalStorage from '../utils/updateLocalStorage';
 import { motion } from 'framer-motion';
 import LongMenu from '../components/LongMenu';
 import {Divider} from '@mui/material';
+import { useCallback, useState } from 'react';
+import ReusableDialog from '../components/ReusableDialog';
 
 export default function EditDeck() {
     const { deckId } = useParams();
     const navigate = useNavigate();
+    const [openModal, setOpenModal] = useState(false);
     const deck = getDeckWithId(deckId);
+
+    // const navigeToDeckList = () => navigate("/decks/");
+
+    const navigeToDeckList = useCallback(() => navigate("/decks/", 
+        {state: {status: "WARNING", message: "Deck Edit cancelled"}}), []);
+
+    const dialogProps = {
+        title: "Are you sure you want to cancel?",
+        btn1Content: "No",
+        btn2Content: "Yes",
+        callbackFunc: navigeToDeckList,
+        content: "This action cannot be undone.",
+    }
+    
+
+    const handleCancel = () => {
+        setOpenModal(true); 
+    }
 
     const {
         deckData,
@@ -40,11 +61,17 @@ export default function EditDeck() {
                         "/decks/", {state: {status:"SUCCESS", message: "Deck updated successfully"
                         }}))}>
 
+                {/* REUSABLE DIALOG FOR SAVE CANCELLATION ---------------- */}
+                <ReusableDialog dialogProps={dialogProps}  openModal={openModal} setOpenModal={setOpenModal} />
+                {/* REUSABLE DIALOG FOR SAVE CANCELLATION ---------------- */}
+
+
                 <Box sx={{ p: { xs: 2, md: 4 }, maxWidth: 900, mx: 'auto', position:"relative" }}>
                     <Paper elevation={3} sx={{ p: { xs: 2, md: 4 }, borderRadius: 3, ml: 4 }}>
 
                         <Box display={"flex"} mb={2}>
-                            <Button startIcon={<ArrowBackIcon />} variant="outlined" sx={{ maxWidth: { sm: 'fit-content' }, }}>
+                            <Button startIcon={<ArrowBackIcon />} onClick={navigeToDeckList}
+                            variant="outlined" sx={{ maxWidth: { sm: 'fit-content' }, }}>
                                 Back to Decks
                             </Button>
                         </Box>
@@ -54,7 +81,11 @@ export default function EditDeck() {
                         <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, 
                             justifyContent: 'space-between', alignItems: { sm: 'center' }, mb: 3, gap: 2 }}>
                             <Typography variant="h5" fontWeight="bold">Edit Deck</Typography>
-                            <LongMenu />
+
+                            {/* THREE DOTTED MENU  ---------------------------------- */}
+                            <LongMenu id={deckId} deck={deck} />
+                            {/* THREE DOTTED MENU ----------------------------------  */}
+
                         </Box>
 
                         <TextField fullWidth value={deckData.deckName}
@@ -104,7 +135,11 @@ export default function EditDeck() {
                         </Box>
 
                         <Box sx={{ display: 'flex', gap: 1 }} className="editDeckButtonContainer">
-                            <Button variant="outlined" sx={{ maxWidth: "200px" }} onClick={() => (navigate("/decks/"))} color="error">Cancel</Button>
+                            <Button variant="outlined" 
+                            sx={{ maxWidth: "200px" }} 
+                            onClick={handleCancel} color="error">
+                                Cancel
+                            </Button>
                             <Button variant="contained" startIcon={<SaveIcon />} sx={{ maxWidth: "200px" }} type="submit">
                                 Save Changes
                             </Button>

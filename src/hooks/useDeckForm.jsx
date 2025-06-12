@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { v4 as getId } from "uuid";
+import checkIfDeckWithSameNameExists from "../utils/checkIfDeckWithSameNameExists";
 
 export default function useDeckForm(initialDeck, initialCards, onSave) {
     const [deckData, setDeckData] = useState(initialDeck);
@@ -48,12 +49,18 @@ export default function useDeckForm(initialDeck, initialCards, onSave) {
 
     const handleSave = (e, redirectFn) => {
         e.preventDefault();
+
+        if (checkIfDeckWithSameNameExists(deckData.deckName)) return "Deck with same name alreadys exists.";
+
         if (isValid()) {
             onSave(deckData, formData);
             if (redirectFn) {
                 redirectFn();
+                return "SUCCESS";
             }
         }
+
+        return "not valid";
     };
 
     return {
@@ -65,5 +72,6 @@ export default function useDeckForm(initialDeck, initialCards, onSave) {
         deleteInputField,
         addInputField,
         handleSave,
+        setError,
     };
 }

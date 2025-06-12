@@ -7,13 +7,21 @@ import submitToLocalStorage from '../utils/submitToLocalStorage';
 import { useNavigate } from 'react-router';
 import useDeckForm from '../hooks/useDeckForm';
 import { motion } from 'framer-motion';
+import ToastMessenger from '../components/ToastMessenger';
 
 export default function CreateDeckForm() {
     const navigate = useNavigate();
 
-    const {deckData, formData, error,updateDeckData, updateInputField, deleteInputField, addInputField, handleSave} = useDeckForm(
+    const {deckData, formData, error, setError,updateDeckData, updateInputField, deleteInputField, addInputField, handleSave} = useDeckForm(
         {deckName: "", deckDescription: ""}, [{ id: getId(), question: "", answer: "" }],(deck, cards) => submitToLocalStorage(deck, cards) 
     );
+
+    const handleForm = (e) => {
+        const res = handleSave(e, () => navigate("/decks/", {state: {status:"SUCCESS" ,message: "Deck created successfully!"}}));
+        if (res !== "SUCCESS") {
+            setError(res);
+        }
+    }
 
     return (
         <motion.div
@@ -21,7 +29,7 @@ export default function CreateDeckForm() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
         >
-            <form onSubmit={(e) => handleSave(e, () => navigate("/decks/", {state: {status:"SUCCESS" ,message: "Deck created successfully!"}}))}>
+            <form onSubmit={(e) => handleForm(e)}>
                 <Box sx={{ p: 4, maxWidth: 800, mx: 'auto' }}>
                 <Paper elevation={3} sx={{ p: 4, borderRadius: 3 }}>
                     <Typography variant="h5" fontWeight="bold" gutterBottom>

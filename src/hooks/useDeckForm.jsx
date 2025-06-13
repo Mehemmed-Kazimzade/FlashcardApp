@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { v4 as getId } from "uuid";
 import checkIfDeckWithSameNameExists from "../utils/checkIfDeckWithSameNameExists";
 
@@ -6,6 +6,10 @@ export default function useDeckForm(initialDeck, initialCards, onSave) {
     const [deckData, setDeckData] = useState(initialDeck);
     const [formData, setFormData] = useState(initialCards);
     const [error, setError] = useState("");
+
+    // this variable is to save the deck's latest name in case user tries to change it.
+    // it is essential to have it considering the fact that we have to check names to avoid same deck creation.
+    const saveName = useRef(deckData.deckName);
 
     const updateDeckData = (inputName, value) => {
         setDeckData(prev => ({ ...prev, [inputName]: value }));
@@ -50,7 +54,7 @@ export default function useDeckForm(initialDeck, initialCards, onSave) {
     const handleSave = (e, redirectFn) => {
         e.preventDefault();
 
-        if (checkIfDeckWithSameNameExists(deckData.deckName)) return "Deck with same name alreadys exists.";
+        if (checkIfDeckWithSameNameExists(deckData.deckName, saveName.current)) return "Deck with same name alreadys exists.";
 
         if (isValid()) {
             onSave(deckData, formData);

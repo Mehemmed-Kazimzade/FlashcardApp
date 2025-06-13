@@ -1,18 +1,18 @@
-import { Box, Button, Grid, Paper, TextField, Typography } from '@mui/material';
+import { Box, Button, Grid, TextField, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { Link } from 'react-router';
 import { useLocation } from 'react-router';
 import { useEffect, useState } from 'react';
-import ToastMessenger from '../components/ToastMessenger';
 import getDecksFromLocalStorage from '../utils/getDecksFromLocalStorage';
 import DeckList from '../components/DeckList';
 import { motion } from 'framer-motion';
+import ReusableSnackbar from '../components/ReusableSnackbar';
 
 export default function Decks() {
     const location = useLocation();
-    const [toastProps, setToastProps] = useState(null);
     const [decks, setDecks] = useState([]);
     const [filteredDecks, setFilteredDecks] = useState([]);
+    const [toast, setToast] = useState({ open: false, severity: "info", message: "" });
     const [searchValue, setSearchValue] = useState("");
 
     const handleChange = (value) => {
@@ -36,7 +36,7 @@ export default function Decks() {
 
         const state = location.state
         if(state?.message && state?.status) {
-            setToastProps({status: state.status, message: state.message});
+            setToast({open: true, severity: state.status.toLowerCase(), message: state.message});
             window.history.replaceState({}, document.title);
         }
     }, [])
@@ -48,7 +48,8 @@ export default function Decks() {
             transition={{ duration: 0.6 }}
         >
 
-        {toastProps && <ToastMessenger status={toastProps.status} message={toastProps.message} />}
+        <ReusableSnackbar toast={toast} setToast={setToast} />
+
         <Box className="deckListContainer" sx={{ p: 4, maxWidth: 1000, mx: 'auto' }}>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }} className="decksContainer" >
             <Typography variant="h4" fontWeight="bold">Your Decks</Typography>

@@ -114,8 +114,8 @@ export default function MiniDrawer( {toggleMode, mode} ) {
     setOpen(false);
   };
 
-  const icons = [<NoteAltIcon />,<LanguageIcon />, <ViewAgendaIcon />];
-  const links = ["/","/readyDecks/","decks/"];
+  const icons = [<NoteAltIcon />, <ViewAgendaIcon />, <LanguageIcon />];
+  const links = ["/","decks/", "/readyDecks/"];
 
   return <>
     <Box sx={{ display: 'flex' }} className="drawer">

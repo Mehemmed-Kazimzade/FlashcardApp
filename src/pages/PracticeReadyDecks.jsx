@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Snackbar, Alert } from "@mui/material";
 import {Grid,Card,CardContent,Typography,Button,CardActions,Container,Stack} from "@mui/material";
 import importDeckToLocalStorage from "../utils/importDeckToLocalStorage";
+import ReusableSnackbar from "../components/ReusableSnackbar";
 
 export default function PracticeReadyDecks() {
     const [isLoading, setIsLoading] = useState(true);
@@ -48,15 +49,7 @@ export default function PracticeReadyDecks() {
 
             <Container className="container " maxWidth="lg" sx={{ mt: 4, mb: 6 }}>
 
-                <Snackbar
-                    open={toast.open}
-                    autoHideDuration={3000}
-                    onClose={() => setToast({ ...toast, open: false })}
-                    anchorOrigin={{ vertical: "top", horizontal: "right" }}>
-                    <Alert onClose={() => setToast({ ...toast, open: false })} severity={toast.severity} sx={{ width: "100%" }}>
-                        {toast.message}
-                    </Alert>
-                </Snackbar>
+                <ReusableSnackbar toast={toast} setToast={setToast} />
 
 
                 <Typography variant="h4" align="center" sx={{ fontWeight: "bold" , mb:4}}>

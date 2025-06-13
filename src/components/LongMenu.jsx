@@ -7,9 +7,12 @@ import { useCallback } from 'react';
 import ReusableDialog from './ReusableDialog';
 import deleteDeckFromLocalStorage from '../utils/deleteDeckFromLocalStorage';
 import { useNavigate } from 'react-router';
+import exportAsCSV from '../utils/exportAsCSV';
+import exportAsJSON from '../utils/exportAsJSON';
 
 const options = [
-    'Export to CSV',
+    'Export as CSV',
+    'Export as JSON',
     'Delete',
 ];
 
@@ -28,9 +31,13 @@ export default function LongMenu({ id, deck }) {
         navigate("/decks/", {state: {status:"SUCCESS", message: "Deck Deleted Succesfully." }});
     }, [id]);
 
-    const exportToCSV = useCallback(() => {
-        
-    });
+    const handleCSV = useCallback(() => {
+        exportAsCSV(deck.deckName,deck);
+    }, []);
+
+    const handleJSON = useCallback(() => {
+        exportAsJSON(deck.deckName, deck);
+    }, []);
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -52,17 +59,28 @@ export default function LongMenu({ id, deck }) {
             setOpenModal(true);
         }
 
-        if (option === "Export to CSV") {
-            console.log(deck);
-            // setDialogProps({
-            //     title: "Are you sure you want to download this deck as a csv file",
-            //     btn1Content: "Cancel",
-            //     btn2Content: "Download",
-            //     callbackFunc: deleteFunc,
-            //     content: "Once you click download, your installment will start.",
-            // });
+        if (option === "Export as CSV") {
+            setDialogProps({
+                title: "Are you sure you want to download this deck as a csv file",
+                btn1Content: "Cancel",
+                btn2Content: "Download",
+                callbackFunc: handleCSV,
+                content: "Once you click download, your installment will start.",
+            });
 
-            // setOpenModal(true);
+            setOpenModal(true);
+        }
+
+        if (option === "Export as JSON") {
+            setDialogProps({
+                title: "Are you sure you want to download this deck as a JSON file",
+                btn1Content: "Cancel",
+                btn2Content: "Download",
+                callbackFunc: handleJSON,
+                content: "Once you click download, your installment will start.",
+            });
+
+            setOpenModal(true);
         }
     };
 

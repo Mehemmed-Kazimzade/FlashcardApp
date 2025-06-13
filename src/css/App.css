@@ -106,13 +106,26 @@ a {
     overflow-wrap: anywhere;
 }
 
+.readyCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 24px;
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+.readyCard:hover {
+    transform: translateY(-5px);
+    border-color: #00897b;
+}
+
 @media screen and (max-width: 1100px) {
-    .deckListContainer, .flashcardsContainer, .resultBox {
+    .deckListContainer, .flashcardsContainer, .resultBox, .successMessage {
         margin-left: 48px !important;
     }
-    
-    .successMessage {
-        margin-left: 48px !important
+
+    .container {
+        margin-left: 30px !important;
     }
 }
 

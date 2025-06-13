@@ -1,0 +1,29 @@
+[
+  {
+    "id": "deck_js_basics",
+    "name": "JavaScript Basics",
+    "cards": [
+      { "id": "q1", "question": "What is a closure?", "answer": "A function that has access to its outer function’s scope, even after the outer function has returned." },
+      { "id": "q2", "question": "Difference between 'let' and 'var'?", "answer": "'let' is block-scoped; 'var' is function-scoped." },
+      { "id": "q3", "question": "What is 'undefined' in JavaScript?", "answer": "A variable declared but not assigned a value is undefined." }
+    ]
+  },
+  {
+    "id": "deck_html_intro",
+    "name": "HTML Introduction",
+    "cards": [
+      { "id": "q1", "question": "What does the <a> tag do?", "answer": "It defines a hyperlink." },
+      { "id": "q2", "question": "What is semantic HTML?", "answer": "HTML that uses tags with meaning, like <article>, <section>, <nav>." },
+      { "id": "q3", "question": "What does <meta charset='UTF-8'> do?", "answer": "Specifies the character encoding for the document." }
+    ]
+  },
+  {
+    "id": "deck_cs_fundamentals",
+    "name": "CS Fundamentals",
+    "cards": [
+      { "id": "q1", "question": "What is Big O notation?", "answer": "It describes the performance or complexity of an algorithm." },
+      { "id": "q2", "question": "What is a stack?", "answer": "A data structure that follows Last-In-First-Out (LIFO) order." },
+      { "id": "q3", "question": "What is a compiler?", "answer": "A program that translates code from a high-level language to machine code." }
+    ]
+  }
+]

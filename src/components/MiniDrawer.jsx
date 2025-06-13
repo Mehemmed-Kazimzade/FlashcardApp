@@ -21,6 +21,7 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import ViewAgendaIcon from '@mui/icons-material/ViewAgenda';
 import { Outlet, Link } from 'react-router';
 import ThemeToggle from './ThemeToggle';
+import LanguageIcon from '@mui/icons-material/Language';
 
 const drawerWidth = 240;
 
@@ -113,8 +114,8 @@ export default function MiniDrawer( {toggleMode, mode} ) {
     setOpen(false);
   };
 
-  const icons = [<NoteAltIcon />, <ViewAgendaIcon />, <AccountBoxIcon />];
-  const links = ["/","decks/","account/"];
+  const icons = [<NoteAltIcon />,<LanguageIcon />, <ViewAgendaIcon />];
+  const links = ["/","/readyDecks/","decks/"];
 
   return <>
     <Box sx={{ display: 'flex' }} className="drawer">
@@ -154,7 +155,7 @@ export default function MiniDrawer( {toggleMode, mode} ) {
         </DrawerHeader>
         <Divider />
         <List >
-          {['Practice','Decks','Account'].map((text, index) => (
+          {['Practice','Ready Decks','Your Decks'].map((text, index) => (
             <Link key={index} to={links[index]}>
                   <ListItem key={text} disablePadding sx={{ display: 'block' }}>
                   <ListItemButton

@@ -13,12 +13,13 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 
 export default function Result() {
-    const {score, decksIndex, flashcards} = useQuiz();
+    const {score, decksIndex, flashcards, dispatch} = useQuiz();
     const total = flashcards.length;
 
     const {remembered, forgotten} = useScoreStats(flashcards);
 
     useEffect(() => {
+        dispatch({type: "END_QUIZ"});
         setBestScore(decksIndex, score);
     }, []);
 
@@ -43,7 +44,7 @@ export default function Result() {
                     <Typography><b>Forgotten</b>: {forgotten} </Typography>
 
                     {<PracticeForgottenCards forgotten={forgotten} />}
-                
+
                 </ResultCard>
 
                 <ScorePieChart rCards={remembered} fCards={forgotten} />

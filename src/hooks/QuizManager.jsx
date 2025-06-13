@@ -30,7 +30,6 @@ export function useQuizManager() {
     }
 
     const endQuiz = () => {
-        dispatch({type: "END_QUIZ"});
         setLastPracticedAt(decksIndex);
         navigate("/result");
     };

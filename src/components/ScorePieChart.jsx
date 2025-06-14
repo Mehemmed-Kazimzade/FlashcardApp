@@ -17,12 +17,12 @@ export default function ScorePieChart({ rCards, fCards }) {
 
             {/* Custom Legend */}
             <Stack spacing={1} alignItems="center">
-                <Typography sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <Typography component="div" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                     <Box sx={{ width: 12, height: 12, borderRadius: '50%', backgroundColor: '#007E33' }} />
                     Remembered Cards
                 </Typography>
 
-                <Typography sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <Typography component="div" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                     <Box sx={{ width: 12, height: 12, borderRadius: '50%', backgroundColor: '#FF8800' }} />
                     Forgotten Cards
                 </Typography>

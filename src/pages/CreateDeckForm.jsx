@@ -17,9 +17,6 @@ export default function CreateDeckForm() {
 
     const handleForm = (e) => {
         const res = handleSave(e, () => navigate("/decks/", {state: {status:"SUCCESS" ,message: "Deck created successfully!"}}));
-        if (res !== "SUCCESS") {
-            setError(res);
-        }
     }
 
     return (

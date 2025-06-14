@@ -36,6 +36,11 @@ export default function useDeckForm(initialDeck, initialCards, onSave) {
     };
 
     const isValid = () => {
+        if (checkIfDeckWithSameNameExists(deckData.deckName, saveName.current)) {
+            setError("Deck with same name already exists.");
+            return false;
+        }
+
         if (deckData.deckName.trim() === "") {
             setError("Deck name is not valid");
             return false;
@@ -53,18 +58,12 @@ export default function useDeckForm(initialDeck, initialCards, onSave) {
 
     const handleSave = (e, redirectFn) => {
         e.preventDefault();
-
-        if (checkIfDeckWithSameNameExists(deckData.deckName, saveName.current)) return "Deck with same name alreadys exists.";
-
         if (isValid()) {
             onSave(deckData, formData);
             if (redirectFn) {
                 redirectFn();
-                return "SUCCESS";
             }
         }
-
-        return "not valid";
     };
 
     return {

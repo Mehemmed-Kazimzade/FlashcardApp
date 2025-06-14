@@ -1,11 +1,8 @@
-import setLastPracticedAt from "../utils/setLastPracticedAt";
 import { useQuiz } from "./QuizContext";
 import { useNavigate } from "react-router";
-import { useRef } from "react";
 
 export function useQuizManager() {
-    const {flashcards,decksIndex, dispatch} = useQuiz();
-    const endCalledRef = useRef(false);
+    const {flashcards, dispatch} = useQuiz();
     const navigate = useNavigate();
 
     const showAnswer = (id) => dispatch({type:"FLIP", payload: {id}});
@@ -30,7 +27,6 @@ export function useQuizManager() {
     }
 
     const endQuiz = () => {
-        setLastPracticedAt(decksIndex);
         navigate("/result");
     };
 

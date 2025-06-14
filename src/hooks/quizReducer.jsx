@@ -7,6 +7,8 @@ export const initialState = {
     series: 0,
     duration: 0,
     quizEnded: false,
+    deck: null,
+    unimported: false,
 };
 
 export function quizReducer(state, action) {
@@ -33,12 +35,23 @@ export function quizReducer(state, action) {
             }
         }
 
+        case "SET_UNIMPORTED": {
+            const {deck} = action.payload;
+
+            return {
+                ...state,
+                deck: deck,
+                unimported: true,
+            }
+        }
+
         case "SET_FLASHCARDS_FROM_DECK": {
             const {flashcards, selectedDeck, decksIndex} = action.payload;
             
 
             return {
                 ...initialState,
+                unimported: state.unimported,
                 decksIndex: decksIndex,
                 selectedDeck: selectedDeck,
                 flashcards: flashcards,
@@ -123,6 +136,7 @@ export function quizReducer(state, action) {
                 duration: 0,
                 selectedDeck: "Random Deck",
                 quizEnded: false,
+                unimported: false,
             }
         }
 

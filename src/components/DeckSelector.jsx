@@ -4,11 +4,10 @@ import InputLabel from '@mui/material/InputLabel';
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
 import { useQuiz } from '../hooks/QuizContext';
-import getDecksFromLocalStorage from '../utils/getDecksFromLocalStorage';
+import NoDecksUI from './NoDecksUI';
 
-export default function DeckSelector() {
+export default function DeckSelector( {allDecks} ) {
     const {selectedDeck, dispatch} = useQuiz();
-    const allDecks = getDecksFromLocalStorage();
 
     const handleChange = (e) => {
         let newSelectedDeck = e.target.value;
@@ -17,6 +16,7 @@ export default function DeckSelector() {
 
     return <>
         <Box minWidth={120}>
+            { allDecks.length === 0 ? <NoDecksUI /> :
             <FormControl >
                 <InputLabel id="demo-simple-select-label">Deck</InputLabel>
                 <Select className='deckSelector'
@@ -37,7 +37,7 @@ export default function DeckSelector() {
                     }
 
                 </Select>
-            </FormControl>
+            </FormControl>}
         </Box>
     </>
 }

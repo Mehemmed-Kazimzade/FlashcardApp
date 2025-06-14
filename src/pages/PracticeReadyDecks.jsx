@@ -4,8 +4,16 @@ import { Snackbar, Alert } from "@mui/material";
 import {Grid,Card,CardContent,Typography,Button,CardActions,Container,Stack} from "@mui/material";
 import importDeckToLocalStorage from "../utils/importDeckToLocalStorage";
 import ReusableSnackbar from "../components/ReusableSnackbar";
+import checkIfDeckWithSameNameExists from "../utils/checkIfDeckWithSameNameExists";
+import { startPracticeSession } from "../utils/startPracticeSession";
+import { useQuiz } from "../hooks/QuizContext";
+import { useNavigate } from "react-router";
+import getDeckFromName from "../utils/getDeckFromName";
+import convertOnlineDeck from "../utils/convertOnlineDeck";
 
 export default function PracticeReadyDecks() {
+    const {dispatch} = useQuiz();
+    const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(true);
     const [onlineDecks, setOnlineDecks] = useState([]);
     const [toast, setToast] = useState({ open: false, severity: "info", message: "" });
@@ -23,6 +31,21 @@ export default function PracticeReadyDecks() {
 
         fetchOnlineDeck();
     }, []);
+
+    const handlePractice = (deck) => {
+        const doesDeckExist = checkIfDeckWithSameNameExists(deck.name);
+
+        let practicedDeck = null;
+
+        if(doesDeckExist) practicedDeck = getDeckFromName(deck.name);
+
+        else{
+            dispatch({type: "SET_UNIMPORTED", payload: {deck}});
+            practicedDeck = convertOnlineDeck(deck);
+        }
+
+        startPracticeSession(practicedDeck, dispatch, navigate);
+    };
 
     const handleImport = (deck) => {
         const res = importDeckToLocalStorage(deck);
@@ -80,7 +103,8 @@ export default function PracticeReadyDecks() {
                                     <Button variant="outlined" onClick={() => handleImport(deck)} fullWidth sx={{textTransform: "none",fontWeight: 500}}>
                                         Import
                                     </Button>
-                                    <Button variant="contained" fullWidth sx={{ borderRadius: 1, textTransform: "none", fontWeight: 500,}}>
+                                    <Button variant="contained" onClick={() => handlePractice(deck)} 
+                                    fullWidth sx={{ borderRadius: 1, textTransform: "none", fontWeight: 500,}}>
                                         Start Practice
                                     </Button>
                                 </Stack>

@@ -1,4 +1,5 @@
 import PracticeForgottenCards from "../components/PracticeForgottenCards";
+import setLastPracticedAt from "../utils/setLastPracticedAt";
 import { useQuiz } from "../hooks/QuizContext"
 import Typography from '@mui/material/Typography';
 import ResultCard from "../components/ResultCard";
@@ -13,14 +14,17 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 
 export default function Result() {
-    const {score, decksIndex, flashcards, dispatch} = useQuiz();
+    const {score, decksIndex, flashcards, dispatch, unimported} = useQuiz();
     const total = flashcards.length;
 
     const {remembered, forgotten} = useScoreStats(flashcards);
 
     useEffect(() => {
+        if(!unimported){
+            setLastPracticedAt(decksIndex);
+            setBestScore(decksIndex, score);
+        }
         dispatch({type: "END_QUIZ"});
-        setBestScore(decksIndex, score);
     }, []);
 
     return <>

@@ -17,7 +17,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import NoteAltIcon from '@mui/icons-material/NoteAlt';
-import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import HomeIcon from '@mui/icons-material/Home';
 import ViewAgendaIcon from '@mui/icons-material/ViewAgenda';
 import { Outlet, Link } from 'react-router';
 import ThemeToggle from './ThemeToggle';
@@ -114,8 +114,8 @@ export default function MiniDrawer( {toggleMode, mode} ) {
     setOpen(false);
   };
 
-  const icons = [<NoteAltIcon />, <ViewAgendaIcon />, <LanguageIcon />];
-  const links = ["/","decks/", "/readyDecks/"];
+  const icons = [<HomeIcon />, <NoteAltIcon />, <ViewAgendaIcon />, <LanguageIcon />];
+  const links = ["/", "/selectDeck/" ,"/decks/", "/readyDecks/"];
 
   return <>
     <Box sx={{ display: 'flex' }} className="drawer">
@@ -138,7 +138,7 @@ export default function MiniDrawer( {toggleMode, mode} ) {
           </IconButton>
           <Box display={"flex"} justifyContent={"space-between"} width={"100%"} alignItems={"center"}>
               <Typography variant="h6" noWrap component="div">
-                Flashcard App
+                SwiftCards
               </Typography>
 
               <ThemeToggle toggleMode={toggleMode} mode={mode} />
@@ -155,7 +155,7 @@ export default function MiniDrawer( {toggleMode, mode} ) {
         </DrawerHeader>
         <Divider />
         <List >
-          {['Practice','Ready Decks','Your Decks'].map((text, index) => (
+          {['Home', 'Practice', 'Your Decks', 'Ready Decks'].map((text, index) => (
             <Link key={index} to={links[index]}>
                   <ListItem key={text} disablePadding sx={{ display: 'block' }}>
                   <ListItemButton

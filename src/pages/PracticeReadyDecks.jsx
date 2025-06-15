@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Snackbar, Alert } from "@mui/material";
 import {Grid,Card,CardContent,Typography,Button,CardActions,Container,Stack} from "@mui/material";
 import importDeckToLocalStorage from "../utils/importDeckToLocalStorage";
 import ReusableSnackbar from "../components/ReusableSnackbar";
@@ -12,7 +11,7 @@ import getDeckFromName from "../utils/getDeckFromName";
 import convertOnlineDeck from "../utils/convertOnlineDeck";
 
 export default function PracticeReadyDecks() {
-    const {dispatch} = useQuiz();
+    const {dispatch, timeDispatch} = useQuiz();
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(true);
     const [onlineDecks, setOnlineDecks] = useState([]);
@@ -44,6 +43,7 @@ export default function PracticeReadyDecks() {
             practicedDeck = convertOnlineDeck(deck);
         }
 
+        timeDispatch({type: "RESET_TIMER" });
         startPracticeSession(practicedDeck, dispatch, navigate);
     };
 

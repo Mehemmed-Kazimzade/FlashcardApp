@@ -119,8 +119,13 @@ a {
     border-color: #00897b;
 }
 
+.mainContainer {
+    text-align: center;
+    padding-block: 64px;
+}
+
 @media screen and (max-width: 1100px) {
-    .deckListContainer, .flashcardsContainer, .resultBox, .successMessage {
+    .deckListContainer, .flashcardsContainer, .resultBox, .successMessage, .mainContainer {
         margin-left: 48px !important;
     }
 

@@ -13,6 +13,8 @@ import { ThemeProvider } from '@emotion/react';
 import EditDeck from './pages/EditDeck';
 import "./css/App.css";
 import PracticeReadyDecks from './pages/PracticeReadyDecks';
+import HomePage from './pages/homePage';
+import ErrorBoundary from './pages/ErrorBoundary';
 
 
 const Main = () => {
@@ -36,23 +38,26 @@ const Main = () => {
 
   return <>
     <StrictMode>
-        <ThemeProvider theme={theme}>
-        <QuizProvider>
-                <BrowserRouter>
-                    <Routes>
-                        <Route path='/' element={<MiniDrawer toggleMode={toggleMode} mode={mode} />}>
-                            <Route index element={<FlashcardApp />} />
-                            <Route path='/practice/' element={<FlashcardList />} />
-                            <Route path='/result/' element={<Result />} />
-                            <Route path='/readyDecks/' element={<PracticeReadyDecks />} />
-                            <Route path="/decks/" element={<Decks />}></Route>
-                            <Route path='/createDeck/' element={<CreateDeckForm />} />
-                            <Route path='/editDeck/:deckId/' element={<EditDeck />} />
-                        </Route>
-                    </Routes>
-                </BrowserRouter>
-        </QuizProvider>
-        </ThemeProvider>
+        <ErrorBoundary>
+            <ThemeProvider theme={theme}>
+                <QuizProvider>
+                        <BrowserRouter>
+                            <Routes>
+                                <Route path='/' element={<MiniDrawer toggleMode={toggleMode} mode={mode} />}>
+                                    <Route index element={<HomePage />} />
+                                    <Route path="/selectDeck/" element={<FlashcardApp />} />
+                                    <Route path='/practice/' element={<FlashcardList />} />
+                                    <Route path='/result/' element={<Result />} />
+                                    <Route path='/readyDecks/' element={<PracticeReadyDecks />} />
+                                    <Route path="/decks/" element={<Decks />}></Route>
+                                    <Route path='/createDeck/' element={<CreateDeckForm />} />
+                                    <Route path='/editDeck/:deckId/' element={<EditDeck />} />
+                                </Route>
+                            </Routes>
+                        </BrowserRouter>
+                </QuizProvider>
+            </ThemeProvider>
+        </ErrorBoundary>
     </StrictMode>
   </>
 }

@@ -3,16 +3,19 @@ import LinearProgress from '@mui/material/LinearProgress';
 import { Box, Typography, Stack, Chip } from "@mui/material";
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { useQuiz } from "../hooks/QuizContext";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useQuizManager } from "../hooks/QuizManager";
 import { motion } from "framer-motion";
 
 export default function FlashcardList() {
-    const {flashcards,timer, selectedDeck, series, duration, timeDispatch} = useQuiz();
+    const {flashcards,timer, selectedDeck, series, duration, timeDispatch, quizEnded} = useQuiz();
     const {endQuiz} = useQuizManager();
     const [timeLeft, setTimeLeft] = useState(duration * 60);
     const [color, setColor] = useState("success");
-    const timeLeftRef=  useRef(timeLeft);
+
+    if (quizEnded) {
+        return <> QUIZ HAS ALREADY ENDED. </>
+    }
 
     useEffect(() => {
         let interval = null;
@@ -20,12 +23,16 @@ export default function FlashcardList() {
         if (timer && duration !== "") {
             interval = setInterval(() => {
                 setTimeLeft(prev => {
-                    timeLeftRef.current = prev - 1;
+                    
                     if (prev === 0) {
                         clearInterval(interval);
                         endQuiz();
                         return 0;
                     }
+
+                    let timeLeft = prev - 1;
+                    timeDispatch({ type: "SET_TIME_LEFT", payload: {timeLeft} });
+
                     if (prev === 60) setColor("warning");
                     if (prev === 10) setColor("error");
 
@@ -36,9 +43,7 @@ export default function FlashcardList() {
 
         return () => {
             if (interval !== null){
-                let timeLeft = timeLeftRef.current;
-                timeDispatch({type: "SET_TIME_LEFT", payload: {timeLeft}});
-                clearInterval(interval)
+                clearInterval(interval);
             };
         };
 

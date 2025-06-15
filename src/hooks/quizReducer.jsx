@@ -7,7 +7,7 @@ export const initialState = {
     series: 0,
     duration: 0,
     quizEnded: false,
-    deck: null,
+    unimportedDeck: null,
     unimported: false,
 };
 
@@ -40,7 +40,7 @@ export function quizReducer(state, action) {
 
             return {
                 ...state,
-                deck: deck,
+                unImportedDeck: deck,
                 unimported: true,
             }
         }
@@ -48,9 +48,9 @@ export function quizReducer(state, action) {
         case "SET_FLASHCARDS_FROM_DECK": {
             const {flashcards, selectedDeck, decksIndex} = action.payload;
             
-
             return {
                 ...initialState,
+                unimportedDeck: state.unImportedDeck,
                 unimported: state.unimported,
                 decksIndex: decksIndex,
                 selectedDeck: selectedDeck,

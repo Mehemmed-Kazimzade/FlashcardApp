@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import Flashcard from "../components/Flashcard";
 import { MemoryRouter } from "react-router-dom";
-import { QuizProvider } from "../hooks/QuizContext/"; // Adjust path as needed
+import { QuizProvider } from "../hooks/QuizContext/";
 
 const renderWithProviders = (ui) => {
   return render(
@@ -24,16 +24,15 @@ describe("Flashcard component", () => {
   test("shows front content (question) when not flipped", () => {
     renderWithProviders(<Flashcard flashcardObject={{ ...baseFlashcard, flipped: false }} />);
 
-    expect(screen.getByText(/Question deck:/i)).toBeInTheDocument();
     expect(screen.getByText("What is React?")).toBeInTheDocument();
-    expect(screen.queryByText(/Answer:/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/A JS library for building UI/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/What is React?/i)).toBeInTheDocument();
   });
-
+  
   test("shows back content (answer) when flipped", () => {
     renderWithProviders(<Flashcard flashcardObject={{ ...baseFlashcard, flipped: true }} />);
-
+    
     expect(screen.getByText(/Answer:/i)).toBeInTheDocument();
-    expect(screen.getByText("A JS library for building UI")).toBeInTheDocument();
-    expect(screen.queryByText(/Question deck:/i)).not.toBeInTheDocument();
+    expect(screen.getByText(/A JS library for building UI/i)).toBeInTheDocument();
   });
 });

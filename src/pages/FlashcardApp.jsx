@@ -47,7 +47,7 @@ export default function FlashcardApp() {
       alert("Could not find a valid deck with cards.");
       return;
     }
-
+    
     startPracticeSession(deck, dispatch, navigate, selectedDeck, { shuffle });
   };
 

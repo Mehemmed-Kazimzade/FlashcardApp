@@ -13,6 +13,8 @@ export function startPracticeSession(deck, dispatch, navigate, selectedDeck, opt
     let flashcards = convertDeckIntoFlashcard(deck);
     const decksIndex = deck.id.split(" ");
 
+    localStorage.setItem("practicedDeck", JSON.stringify(deck.deckName))
+
     if (options.shuffle) flashcards = assignPlaces(shuffleArray(flashcards));
 
     dispatch({ type: "SET_FLASHCARDS_FROM_DECK", payload: { flashcards, selectedDeck, decksIndex} });

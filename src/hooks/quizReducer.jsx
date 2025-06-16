@@ -9,6 +9,7 @@ export const initialState = {
     quizEnded: false,
     unimportedDeck: null,
     unimported: false,
+    practicingForgottenCards: false,
 };
 
 export function quizReducer(state, action) {
@@ -29,9 +30,17 @@ export function quizReducer(state, action) {
 
         case "SET_DECK": {
             const {newSelectedDeck} = action.payload;
+
             return {
                 ...state,
                 selectedDeck: newSelectedDeck,
+            }
+        }
+
+        case "SET_PRACTICING_FORGOTTEN_CARDS": {
+            return {
+                ...state,
+                practicingForgottenCards: true,
             }
         }
 
@@ -123,20 +132,14 @@ export function quizReducer(state, action) {
                 flashcards: updatedFlashcards,
                 series: 0,
                 score: 0,
+                practicingForgottenCards: true,
                 quizEnded: false,
             }
         }
 
         case "RESET_QUIZ": {
             return {
-                category: "All",
-                flashcards: [],
-                series: 0,
-                score: 0,
-                duration: 0,
-                selectedDeck: "Random Deck",
-                quizEnded: false,
-                unimported: false,
+                ...initialState,
             }
         }
 

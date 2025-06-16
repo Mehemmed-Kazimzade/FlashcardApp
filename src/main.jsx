@@ -15,7 +15,7 @@ import "./css/App.css";
 import PracticeReadyDecks from './pages/PracticeReadyDecks';
 import HomePage from './pages/homePage';
 import ErrorBoundary from './pages/ErrorBoundary';
-
+import DeckStats from './pages/DeckStats';
 
 const Main = () => {
     const [mode, setMode]  = useState('light');
@@ -46,6 +46,7 @@ const Main = () => {
                                 <Route path='/' element={<MiniDrawer toggleMode={toggleMode} mode={mode} />}>
                                     <Route index element={<HomePage />} />
                                     <Route path="/selectDeck/" element={<FlashcardApp />} />
+                                    <Route path="/stats/" element={<DeckStats />} />
                                     <Route path='/practice/' element={<FlashcardList />} />
                                     <Route path='/result/' element={<Result />} />
                                     <Route path='/readyDecks/' element={<PracticeReadyDecks />} />

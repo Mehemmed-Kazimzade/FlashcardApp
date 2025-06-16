@@ -10,17 +10,30 @@ import getScoreColor from "../utils/getScoreColor";
 import useScoreStats from "../hooks/useScoreStats";
 import ScorePieChart from "../components/ScorePieChart";
 import setBestScore from "../utils/setBestScore";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import setStats from "../utils/setStats";
 
 export default function Result() {
-    const {score, decksIndex, flashcards, dispatch, unimported} = useQuiz();
+    const {score, decksIndex, flashcards, dispatch, unimported, practicingForgottenCards} = useQuiz();
     const total = flashcards.length;
 
     const {remembered, forgotten} = useScoreStats(flashcards);
+    const hasRun = useRef(false);
 
     useEffect(() => {
+        if (hasRun.current) return;
+        hasRun.current = true;
+
         if(!unimported){
+            if (!practicingForgottenCards){
+                const deckName = JSON.parse(localStorage.getItem("practicedDeck"))
+
+                if (deckName !== "All Decks") {
+                    setStats(deckName, score, total);
+                }
+            }
+
             setLastPracticedAt(decksIndex);
             setBestScore(decksIndex, score);
         }

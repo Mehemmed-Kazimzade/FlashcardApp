@@ -21,6 +21,7 @@ export default function DeckList({decks, searchValue}) {
     const navigate = useNavigate();
 
     const handlePractice = (deck) => {
+        
         startPracticeSession(deck, dispatch, navigate, deck.deckName);
     }
 

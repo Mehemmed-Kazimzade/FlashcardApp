@@ -34,7 +34,7 @@ export default function FlashcardActions({ props }) {
 
         return () => document.body.removeEventListener("keyup", spaceBarListener);
 
-    }, [props.isFlipped]);
+    }, [quizEnded, showAnswer, handleScore, props.id, props.place, props.isFlipped]);
 
     if (!props.isFlipped) {
         return <>

@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { useQuiz } from "./QuizContext";
 import { useNavigate } from "react-router";
 
@@ -5,17 +6,17 @@ export function useQuizManager() {
     const {flashcards, dispatch, timeDispatch} = useQuiz();
     const navigate = useNavigate();
 
-    const showAnswer = (id) => dispatch({type:"FLIP", payload: {id}});
+    const showAnswer = useCallback(id => dispatch({type:"FLIP", payload: {id}}), [dispatch]);
 
-    const handleNext = (place, id) => {
+    const handleNext = useCallback((place, id) => {
         if (place < flashcards.length) dispatch({type:"NEXT", payload: {id}});
-    }   
+    }, [dispatch, flashcards.length]);
 
-    const handlePrevious = (place, id) => {
-        if (place > 1) dispatch({type:"PREVIOUS", payload: {id}})
-    }
+    const handlePrevious = useCallback((place, id) => {
+        if (place > 1) dispatch({type:"PREVIOUS", payload: {id}});
+    }, [dispatch]);
 
-    const handleScore = (score, place, id, type = "button") => {
+    const handleScore = useCallback((score, place, id) => {
         if (score === 1) dispatch({type:"RECORD_REMEMBERED", payload: {id}});
         dispatch({type: "RECORD_SCORE", payload: {score}});
 
@@ -24,11 +25,11 @@ export function useQuizManager() {
         }
 
         else handleNext(place, id);
-    }
+    }, [dispatch, flashcards.length]);
 
-    const endQuiz = () => {
+    const endQuiz = useCallback(() => {
         navigate("/result");
-    };
+    }, [navigate]);
 
     return {showAnswer, handleNext, handlePrevious, handleScore, endQuiz}
 }

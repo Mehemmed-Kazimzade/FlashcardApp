@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { v4 as getId } from "uuid";
 import checkIfDeckWithSameNameExists from "../utils/checkIfDeckWithSameNameExists";
 
@@ -11,11 +11,11 @@ export default function useDeckForm(initialDeck, initialCards, onSave) {
     // it is essential to have it considering the fact that we have to check names to avoid same deck creation.
     const saveName = useRef(deckData.deckName);
 
-    const updateDeckData = (inputName, value) => {
+    const updateDeckData = useCallback((inputName, value) => {
         setDeckData(prev => ({ ...prev, [inputName]: value }));
-    };
+    }, [setDeckData]);
 
-    const addInputField = () => {
+    const addInputField = useCallback(() => {
         const newField = { id: getId(), question: "", answer: "" };
         setFormData(prev => [...prev, newField]);
 
@@ -23,17 +23,17 @@ export default function useDeckForm(initialDeck, initialCards, onSave) {
             const lastCard = document.querySelector(`[data-card-id="${newField.id}"]`);
             lastCard?.scrollIntoView({ behavior: 'smooth' });
         }, 250);
-    };
+    }, [setFormData]);
 
-    const updateInputField = (id, inputName, inputValue) => {
+    const updateInputField = useCallback((id, inputName, inputValue) => {
         setFormData(prev =>
             prev.map(input => (input.id === id ? { ...input, [inputName]: inputValue } : input))
         );
-    };
+    }, [setFormData]);
 
-    const deleteInputField = (id) => {
+    const deleteInputField = useCallback((id) => {
         setFormData(prev => prev.filter(input => input.id !== id));
-    };
+    }, [setFormData]);
 
     const isValid = () => {
         if (checkIfDeckWithSameNameExists(deckData.deckName, saveName.current)) {

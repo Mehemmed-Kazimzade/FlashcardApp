@@ -19,8 +19,6 @@ export default function EditDeck() {
     const [openModal, setOpenModal] = useState(false);
     const deck = getDeckWithId(deckId);
 
-    // const navigeToDeckList = () => navigate("/decks/");
-
     const navigeToDeckList = useCallback(() => navigate("/decks/", 
         {state: {status: "WARNING", message: "Deck Edit cancelled"}}), []);
 

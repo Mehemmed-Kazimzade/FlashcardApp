@@ -11,12 +11,12 @@ import { motion } from 'framer-motion';
 export default function CreateDeckForm() {
     const navigate = useNavigate();
 
-    const {deckData, formData, error, setError,updateDeckData, updateInputField, deleteInputField, addInputField, handleSave} = useDeckForm(
+    const {deckData, formData, error, updateDeckData, updateInputField, deleteInputField, addInputField, handleSave} = useDeckForm(
         {deckName: "", deckDescription: ""}, [{ id: getId(), question: "", answer: "" }],(deck, cards) => submitToLocalStorage(deck, cards) 
     );
 
     const handleForm = (e) => {
-        const res = handleSave(e, () => navigate("/decks/", {state: {status:"SUCCESS" ,message: "Deck created successfully!"}}));
+        handleSave(e, () => navigate("/decks/", {state: {status:"SUCCESS" ,message: "Deck created successfully!"}}));
     }
 
     return (

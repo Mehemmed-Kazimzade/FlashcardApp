@@ -19,13 +19,16 @@ export default function PracticeReadyDecks() {
 
     useEffect(() => {
         const fetchOnlineDeck = async () => {
-            const link = "https://raw.githubusercontent.com/Mehemmed77/flashcards-deck/main/decks.json";
-            fetch(link)
-            .then(res => res.json())
-            .then(data => setOnlineDecks(data))
-            .catch(e => console.error("Failed to load decks:", e));
-
-            setIsLoading(false);
+            try {
+                const link = "https://raw.githubusercontent.com/Mehemmed77/flashcards-deck/main/decks.json";
+                const response = await fetch(link);
+                const data = await response.json();
+                setOnlineDecks(data);
+            } catch (e) {
+                console.error("Failed to load decks:", e);
+            } finally {
+                setIsLoading(false);
+            }
         }
 
         fetchOnlineDeck();

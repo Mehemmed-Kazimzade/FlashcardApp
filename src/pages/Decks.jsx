@@ -2,7 +2,7 @@ import { Box, Button, Grid, TextField, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { Link } from 'react-router';
 import { useLocation } from 'react-router';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import getDecksFromLocalStorage from '../utils/getDecksFromLocalStorage';
 import DeckList from '../components/DeckList';
 import { motion } from 'framer-motion';
@@ -14,20 +14,31 @@ export default function Decks() {
     const [filteredDecks, setFilteredDecks] = useState([]);
     const [toast, setToast] = useState({ open: false, severity: "info", message: "" });
     const [searchValue, setSearchValue] = useState("");
+    const timeOutIdRef = useRef(null);
 
-    const handleChange = (value) => {
-        setSearchValue(value);
-        if (value === "") {
+    const applyFilter = useCallback(value => {
+        if (value === ""){
             setFilteredDecks(decks);
         }
-
+        
         else{
             const query = value.toLowerCase();
-            const regex = new RegExp(query, "i");
+            const regex = new RegExp(query, 'i');
             
             setFilteredDecks(decks.filter(deck => regex.test(deck.deckName.toLowerCase())));
         }
-    }
+        
+    }, [decks]);
+                
+    const handleChange = useCallback(value => {
+        setSearchValue(value);
+        if(timeOutIdRef.current){
+            clearTimeout(timeOutIdRef.current);
+        }
+
+        timeOutIdRef.current = setTimeout(() => applyFilter(value), 300);
+
+    }, [applyFilter]);
 
     useEffect(() => {
         const decksFromStorage = getDecksFromLocalStorage();
@@ -39,6 +50,10 @@ export default function Decks() {
             setToast({open: true, severity: state.status.toLowerCase(), message: state.message});
             window.history.replaceState({}, document.title);
         }
+
+        return () => {
+            if(timeOutIdRef.current) clearTimeout(timeOutIdRef.current);
+        };
     }, [])
 
     return <>

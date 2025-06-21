@@ -10,7 +10,7 @@ import getScoreColor from "../utils/getScoreColor";
 import useScoreStats from "../hooks/useScoreStats";
 import ScorePieChart from "../components/ScorePieChart";
 import setBestScore from "../utils/setBestScore";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import setStats from "../utils/setStats";
 
@@ -19,24 +19,19 @@ export default function Result() {
     const total = flashcards.length;
 
     const {remembered, forgotten} = useScoreStats(flashcards);
-    const hasRun = useRef(false);
 
     useEffect(() => {
-        if (hasRun.current) return;
-        hasRun.current = true;
+        // If a deck is both imported and is being practiced first time we should set best score, last practiced at.
+        if( !unimported && !practicingForgottenCards ){
+            const deckName = JSON.parse(localStorage.getItem("practicedDeck"))
 
-        if(!unimported){
-            if (!practicingForgottenCards){
-                const deckName = JSON.parse(localStorage.getItem("practicedDeck"))
-
-                if (deckName !== "All Decks") {
-                    setStats(deckName, score, total);
-                }
+            if (deckName !== "All Decks") {
+                setStats(deckName, score, total);
+                setLastPracticedAt(decksIndex);
+                setBestScore(decksIndex, score);
             }
-
-            setLastPracticedAt(decksIndex);
-            setBestScore(decksIndex, score);
         }
+
         dispatch({type: "END_QUIZ"});
     }, []);
 

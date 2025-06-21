@@ -26,13 +26,12 @@ export default class ErrorBoundary extends React.Component {
       return (
         <Box
           sx={{
-            backgroundColor: "#121212",
-            minHeight: "100vh",
-            color: "#fff",
+            backgroundColor: "white",
+            minHeight: "91vh",
+            color: "black",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            px: 2,
             textAlign: "center"
           }}
         >

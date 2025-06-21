@@ -22,7 +22,7 @@ export default function DeckSelector( {allDecks} ) {
                 <Select className='deckSelector'
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    value={selectedDeck}
+                    value={selectedDeck !== undefined || selectedDeck !== null ? selectedDeck : "Random Deck"}
                     label="Select Deck"
                     onChange={(e) => handleChange(e)}>
                     <MenuItem value={"Random Deck"}>Random Deck</MenuItem>

@@ -14,11 +14,12 @@ export default function PracticeForgottenCards({forgotten}) {
                 card => (!card.isRemembered)).map((card, idx) => 
                     ({...card, flipped:false, place: idx + 1}));
 
-        dispatch({type: "PRACTICE_AGAIN", payload: {updatedFlashcards}});
+        dispatch({ type: "PRACTICE_AGAIN", payload: {updatedFlashcards }});
+        dispatch({ type: "SET_PRACTICING_FORGOTTEN_CARDS" });
         navigate("/practice");
     }
 
-    if(forgotten > 0) {
+    if(forgotten > 0) { 
         return (
             <div>
                 <Button variant="contained" sx={{ mt: 2, mb: 0 }} size={isSmall ? 'small' : "large"} onClick={handleClick}>

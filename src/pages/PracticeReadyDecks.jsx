@@ -54,6 +54,11 @@ export default function PracticeReadyDecks() {
         const res = importDeckToLocalStorage(deck);
     
         if (res === false){
+            if (toast.open) {
+                setToast({...toast, open: false});
+                setTimeout(() => {}, 800);
+            }
+
             setToast({ open: true, severity: "error", message: "Deck already imported" });
         }
 

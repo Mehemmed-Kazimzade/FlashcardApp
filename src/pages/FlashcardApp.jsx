@@ -21,7 +21,7 @@ import TimerIcon from '@mui/icons-material/Timer';
 import { startPracticeSession } from "../utils/startPracticeSession";
 import determineModeFromSelectedDeck from "../utils/determineModeFromSelectedDeck";
 import getDeckFromSelectedMode from "../utils/getDeckFromSelectedMode";
-import TimeSetter from "../components/timeSetter";
+import TimeSetter from "../components/TimeSetter";
 import getDecksFromLocalStorage from '../utils/getDecksFromLocalStorage';
 import ResponsiveButton from "../components/ResposiveButton";
 import NoDecksUI from "../components/NoDecksUI";

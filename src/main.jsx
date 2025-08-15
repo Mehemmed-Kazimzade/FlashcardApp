@@ -13,7 +13,7 @@ import { ThemeProvider } from '@emotion/react';
 import EditDeck from './pages/EditDeck';
 import "./css/App.css";
 import PracticeReadyDecks from './pages/PracticeReadyDecks';
-import HomePage from './pages/homePage';
+import HomePage from './pages/HomePage';
 import ErrorBoundary from './pages/ErrorBoundary';
 import DeckStats from './pages/DeckStats';
 

@@ -3,6 +3,7 @@ import '../css/FlipStyles.css';
 import CardBack from '../flipAnimationComponents/CardBack';
 import CardFront from '../flipAnimationComponents/CardFront';
 
+
 export default function Flashcard({ flashcardObject }) {
   const actionsprops = {
     id: flashcardObject.id,

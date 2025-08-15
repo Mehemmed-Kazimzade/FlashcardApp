@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import '../css/FlipStyles.css';
+import '../css/flipStyles.css';
 import CardBack from '../flipAnimationComponents/CardBack';
 import CardFront from '../flipAnimationComponents/CardFront';
 
